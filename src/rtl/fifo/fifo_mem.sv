@@ -12,4 +12,18 @@ module fifo_mem #(
     output reg  [DATA_WIDTH-1:0] rd_data
 );
 
-    
+    localparam DEPTH = 1 << ADDR_WIDTH;
+
+    reg [DATA_WIDTH-1:0] mem [0:DEPTH-1];
+
+    always @(posedge wr_clk) begin
+        if (wr_en) begin
+            mem[wr_addr] <= wr_data;
+        end
+    end
+
+    always @(posedge rd_clk) begin
+        rd_data <= mem[rd_addr];
+    end
+
+endmodule
