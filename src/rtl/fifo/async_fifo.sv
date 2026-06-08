@@ -13,10 +13,11 @@ module async_fifo #(
     input  wire                  wr_en,
     output wire                  full,
     output wire                  almost_full,
-    
+
     // Read interface
     output wire [DATA_WIDTH-1:0] rd_data,
     input  wire                  rd_en,
     output wire                  empty,
     output wire                  almost_empty
 );
+
