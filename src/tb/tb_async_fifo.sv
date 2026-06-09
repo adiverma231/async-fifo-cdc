@@ -8,6 +8,9 @@ module tb_async_fifo;
     localparam AFULL_THRES  = DEPTH - 2;
     localparam AEMPTY_THRES = 2;
 
+    time wr_half_period;
+    time rd_half_period;
+
     reg                   wr_clk;
     reg                   rd_clk;
     reg                   rst_n;
@@ -21,6 +24,7 @@ module tb_async_fifo;
     wire                  almost_empty;
 
     int unsigned errors;
+    int unsigned model_count;
     byte unsigned expected_q[$];
 
     async_fifo #(
@@ -42,28 +46,23 @@ module tb_async_fifo;
         .almost_empty(almost_empty)
     );
 
-    initial wr_clk = 1'b0;
-    always #5 wr_clk = ~wr_clk;
-
-    initial rd_clk = 1'b0;
-    always #7 rd_clk = ~rd_clk;
+    initial begin
+        wr_half_period = 5ns;
+        wr_clk = 1'b0;
+        forever #(wr_half_period) wr_clk = ~wr_clk;
+    end
 
     initial begin
-        errors  = 0;
-        rst_n   = 1'b0;
-        wr_data = '0;
-        wr_en   = 1'b0;
-        rd_en   = 1'b0;
+        rd_half_period = 7ns;
+        rd_clk = 1'b0;
+        forever #(rd_half_period) rd_clk = ~rd_clk;
+    end
 
-        repeat (5) @(posedge wr_clk);
-        rst_n = 1'b1;
-        repeat (5) @(posedge wr_clk);
-        repeat (3) @(posedge rd_clk);
+    initial begin
+        errors = 0;
 
-        check_reset_state();
-        test_fill_and_full();
-        test_drain_and_empty();
-        test_async_random();
+        run_ratio_test("write faster than read", 5ns, 7ns);
+        run_ratio_test("read faster than write", 9ns, 3ns);
 
         if (errors == 0) begin
             $display("PASS: tb_async_fifo completed with no errors");
@@ -74,6 +73,44 @@ module tb_async_fifo;
         $finish;
     end
 
+    task automatic run_ratio_test(
+        input string name,
+        input time   wr_half,
+        input time   rd_half
+    );
+        begin
+            $display("TEST RATIO: %s", name);
+            wr_half_period = wr_half;
+            rd_half_period = rd_half;
+
+            apply_reset();
+            check_reset_state();
+            test_fill_flags_and_overflow();
+            test_drain_flags_and_empty();
+
+            apply_reset();
+            test_async_random();
+        end
+    endtask
+
+    task automatic apply_reset;
+        begin
+            rst_n       = 1'b0;
+            wr_data     = '0;
+            wr_en       = 1'b0;
+            rd_en       = 1'b0;
+            model_count = 0;
+            expected_q.delete();
+
+            repeat (4) @(posedge wr_clk);
+            #3;
+            rst_n = 1'b1;
+
+            repeat (4) @(posedge wr_clk);
+            repeat (4) @(posedge rd_clk);
+        end
+    endtask
+
     task automatic check_reset_state;
         begin
             if (!empty) begin
@@ -81,25 +118,84 @@ module tb_async_fifo;
                 errors++;
             end
 
+            if (!almost_empty) begin
+                $display("ERROR: FIFO should be almost_empty after reset");
+                errors++;
+            end
+
             if (full) begin
                 $display("ERROR: FIFO should not be full after reset");
+                errors++;
+            end
+
+            if (almost_full) begin
+                $display("ERROR: FIFO should not be almost_full after reset");
                 errors++;
             end
         end
     endtask
 
-    task automatic write_word(input byte unsigned data);
+    task automatic attempt_write(
+        input  byte unsigned data,
+        output bit           accepted
+    );
+        bit was_full;
         begin
             @(negedge wr_clk);
             wr_data = data;
             wr_en   = 1'b1;
+
+            @(posedge wr_clk);
+            was_full = full;
+            #1;
+            accepted = !was_full;
+
             @(negedge wr_clk);
-            wr_en   = 1'b0;
-            expected_q.push_back(data);
+            wr_en = 1'b0;
         end
     endtask
 
-    task automatic read_word;
+    task automatic expect_write(input byte unsigned data);
+        bit accepted;
+        begin
+            attempt_write(data, accepted);
+            if (!accepted) begin
+                $display("ERROR: write 0x%0h was rejected unexpectedly", data);
+                errors++;
+            end else begin
+                expected_q.push_back(data);
+                model_count++;
+            end
+        end
+    endtask
+
+    task automatic attempt_read(
+        output bit           accepted,
+        output byte unsigned data
+    );
+        bit was_empty;
+        begin
+            data = '0;
+
+            @(negedge rd_clk);
+            rd_en = 1'b1;
+
+            @(posedge rd_clk);
+            was_empty = empty;
+            #1;
+            accepted = !was_empty;
+            if (accepted) begin
+                data = rd_data;
+            end
+
+            @(negedge rd_clk);
+            rd_en = 1'b0;
+        end
+    endtask
+
+    task automatic expect_read;
+        bit accepted;
+        byte unsigned actual;
         byte unsigned expected;
         begin
             if (expected_q.size() == 0) begin
@@ -108,90 +204,134 @@ module tb_async_fifo;
                 return;
             end
 
-            expected = expected_q.pop_front();
+            attempt_read(accepted, actual);
+            if (!accepted) begin
+                $display("ERROR: read was rejected unexpectedly");
+                errors++;
+                return;
+            end
 
-            @(negedge rd_clk);
-            rd_en = 1'b1;
-            @(posedge rd_clk);
-            #1;
-            if (rd_data !== expected) begin
-                $display("ERROR: read mismatch, expected 0x%0h got 0x%0h", expected, rd_data);
+            expected = expected_q.pop_front();
+            model_count--;
+            if (actual !== expected) begin
+                $display("ERROR: read mismatch, expected 0x%0h got 0x%0h", expected, actual);
                 errors++;
             end
-            @(negedge rd_clk);
-            rd_en = 1'b0;
         end
     endtask
 
-    task automatic test_fill_and_full;
-        int i;
+    task automatic check_almost_full(input string where);
+        bit exp_afull;
         begin
-            $display("TEST: fill and full");
+            exp_afull  = (model_count >= AFULL_THRES);
+
+            if (almost_full !== exp_afull) begin
+                $display("ERROR: almost_full mismatch at %s count=%0d expected=%0b got=%0b",
+                         where, model_count, exp_afull, almost_full);
+                errors++;
+            end
+        end
+    endtask
+
+    task automatic check_almost_empty(input string where);
+        bit exp_aempty;
+        begin
+            exp_aempty = (model_count <= AEMPTY_THRES);
+
+            if (almost_empty !== exp_aempty) begin
+                $display("ERROR: almost_empty mismatch at %s count=%0d expected=%0b got=%0b",
+                         where, model_count, exp_aempty, almost_empty);
+                errors++;
+            end
+        end
+    endtask
+
+    task automatic test_fill_flags_and_overflow;
+        int i;
+        bit accepted;
+        begin
+            $display("TEST: fill, almost_full, full, overflow protection");
 
             for (i = 0; i < DEPTH; i++) begin
                 wait (!full);
-                write_word(i[7:0]);
+                expect_write(i[7:0]);
+                check_almost_full("fill");
             end
 
-            repeat (3) @(posedge wr_clk);
             if (!full) begin
-                $display("ERROR: full should assert after %0d writes", DEPTH);
+                $display("ERROR: full should assert after %0d accepted writes", DEPTH);
                 errors++;
             end
 
-            @(negedge wr_clk);
-            wr_data = 8'hff;
-            wr_en   = 1'b1;
-            @(negedge wr_clk);
-            wr_en   = 1'b0;
-
-            if (expected_q.size() != DEPTH) begin
-                $display("ERROR: extra write changed scoreboard size");
+            attempt_write(8'hff, accepted);
+            if (accepted) begin
+                $display("ERROR: overflow write was accepted while full");
                 errors++;
+                expected_q.push_back(8'hff);
+                model_count++;
             end
         end
     endtask
 
-    task automatic test_drain_and_empty;
+    task automatic test_drain_flags_and_empty;
         int i;
         begin
-            $display("TEST: drain and empty");
+            $display("TEST: drain, almost_empty, empty, overflow data absence");
+
+            repeat (4) @(posedge rd_clk);
 
             for (i = 0; i < DEPTH; i++) begin
                 wait (!empty);
-                read_word();
+                expect_read();
+                check_almost_empty("drain");
             end
 
-            repeat (3) @(posedge rd_clk);
             if (!empty) begin
                 $display("ERROR: empty should assert after draining FIFO");
+                errors++;
+            end
+
+            if (expected_q.size() != 0) begin
+                $display("ERROR: scoreboard not empty after drain, size=%0d", expected_q.size());
                 errors++;
             end
         end
     endtask
 
     task automatic test_async_random;
+        mailbox random_mb;
         int writes_done;
         int reads_done;
         int total_words;
         begin
             $display("TEST: randomized async traffic");
 
+            random_mb   = new();
             writes_done = 0;
             reads_done  = 0;
             total_words  = 200;
 
             fork
                 begin : writer
+                    bit was_full;
+                    byte unsigned data;
+
                     while (writes_done < total_words) begin
                         @(negedge wr_clk);
-                        if (!full && ($urandom_range(0, 2) != 0)) begin
-                            wr_data = writes_done[7:0];
+                        if ($urandom_range(0, 2) != 0) begin
+                            data    = writes_done[7:0];
+                            wr_data = data;
                             wr_en   = 1'b1;
-                            expected_q.push_back(writes_done[7:0]);
-                            writes_done++;
                         end else begin
                             wr_en = 1'b0;
+                        end
+
+                        @(posedge wr_clk);
+                        was_full = full;
+                        #1;
+                        if (wr_en && !was_full) begin
+                            random_mb.put(data);
+                            writes_done++;
                         end
                     end
 
@@ -200,19 +340,26 @@ module tb_async_fifo;
                 end
 
                 begin : reader
+                    bit was_empty;
+                    int expected;
+
                     while (reads_done < total_words) begin
                         @(negedge rd_clk);
-                        if (!empty && expected_q.size() != 0 && ($urandom_range(0, 2) != 0)) begin
-                            rd_en = 1'b1;
-                            @(posedge rd_clk);
-                            #1;
-                            if (rd_data !== expected_q.pop_front()) begin
-                                $display("ERROR: random read mismatch at read %0d", reads_done);
+                        rd_en = ($urandom_range(0, 2) != 0);
+
+                        @(posedge rd_clk);
+                        was_empty = empty;
+                        #1;
+                        if (rd_en && !was_empty) begin
+                            if (!random_mb.try_get(expected)) begin
+                                $display("ERROR: FIFO produced data before scoreboard had data");
+                                errors++;
+                            end else if (rd_data !== expected[DATA_WIDTH-1:0]) begin
+                                $display("ERROR: random read mismatch at read %0d, expected 0x%0h got 0x%0h",
+                                         reads_done, expected[DATA_WIDTH-1:0], rd_data);
                                 errors++;
                             end
                             reads_done++;
-                        end else begin
-                            rd_en = 1'b0;
                         end
                     end
 
@@ -220,11 +367,6 @@ module tb_async_fifo;
                     rd_en = 1'b0;
                 end
             join
-
-            if (expected_q.size() != 0) begin
-                $display("ERROR: scoreboard not empty after random test, size=%0d", expected_q.size());
-                errors++;
-            end
         end
     endtask
 

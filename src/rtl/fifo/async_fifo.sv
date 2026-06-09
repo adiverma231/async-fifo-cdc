@@ -28,8 +28,22 @@ module async_fifo #(
     wire [ADDR_WIDTH:0]   wptr_gray_sync;
     wire [ADDR_WIDTH:0]   rptr_gray_sync;
     wire                  wr_mem_en;
+    wire                  wr_rst_n;
+    wire                  rd_rst_n;
 
     assign wr_mem_en = wr_en && !full;
+
+    reset_sync wr_reset_sync_inst (
+        .clk   (wr_clk),
+        .arst_n(rst_n),
+        .srst_n(wr_rst_n)
+    );
+
+    reset_sync rd_reset_sync_inst (
+        .clk   (rd_clk),
+        .arst_n(rst_n),
+        .srst_n(rd_rst_n)
+    );
 
     fifo_mem #(
         .DATA_WIDTH(DATA_WIDTH),
@@ -48,7 +62,7 @@ module async_fifo #(
         .ADDR_WIDTH(ADDR_WIDTH)
     ) sync_r2w_inst (
         .wr_clk         (wr_clk),
-        .rst_n          (rst_n),
+        .rst_n          (wr_rst_n),
         .rptr_gray      (rptr_gray),
         .rptr_gray_sync (rptr_gray_sync)
     );
@@ -57,7 +71,7 @@ module async_fifo #(
         .ADDR_WIDTH(ADDR_WIDTH)
     ) sync_w2r_inst (
         .rd_clk         (rd_clk),
-        .rst_n          (rst_n),
+        .rst_n          (rd_rst_n),
         .wptr_gray      (wptr_gray),
         .wptr_gray_sync (wptr_gray_sync)
     );
@@ -67,7 +81,7 @@ module async_fifo #(
         .AFULL_THRES(AFULL_THRES)
     ) wptr_full_inst (
         .wr_clk        (wr_clk),
-        .rst_n         (rst_n),
+        .rst_n         (wr_rst_n),
         .wr_en         (wr_en),
         .rptr_gray_sync(rptr_gray_sync),
         .wr_addr       (wr_addr),
@@ -81,7 +95,7 @@ module async_fifo #(
         .AEMPTY_THRES(AEMPTY_THRES)
     ) rptr_empty_inst (
         .rd_clk        (rd_clk),
-        .rst_n         (rst_n),
+        .rst_n         (rd_rst_n),
         .rd_en         (rd_en),
         .wptr_gray_sync(wptr_gray_sync),
         .rd_addr       (rd_addr),
