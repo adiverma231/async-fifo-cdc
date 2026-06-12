@@ -53,3 +53,16 @@ src/
 | Parser architecture | Pipelined, cut-through | Minimizes latency (start parsing before full frame arrives) |
 | Target device | Xilinx Artix-7 (XC7A35T or XC7A100T) | Vivado is industry standard; Arty A7 has Ethernet PHY |
 | Verification | cocotb (Python) + SVA assertions | cocotb for stimulus generation; SVA for formal-friendly properties |
+
+## Target Metrics
+
+| Metric | Target | Stretch |
+|--------|--------|---------|
+| FIFO throughput | 1 word/cycle, no bubbles | -- |
+| Parser latency | < 8 cycles (< 40ns @ 200 MHz) | < 5 cycles |
+| System Fmax | 200 MHz on Artix-7 | 250 MHz |
+| Resource usage | < 5% of XC7A100T | < 2% |
+| FIFO depth range | 16 to 4096 (parameterized) | -- |
+| Data width range | 8 to 512 bits (parameterized) | -- |
+| Verification coverage | > 95% line | + formal proof |
+| Clock domains | 2 (RX 125 MHz, logic 200 MHz) | 3 (add TX) |
