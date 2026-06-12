@@ -42,3 +42,14 @@ src/
     block_diagram.png        -- Architecture diagram
     timing_report.pdf        -- Vivado timing summary
 ```
+### Key Design Decisions (locked in)
+
+| Decision | Choice | Rationale |
+|----------|--------|-----------|
+| Language | SystemVerilog | Self explanatory |
+| FIFO pointer encoding | Gray code (Cummings style) | Only 1 bit transitions per cycle, safe for CDC |
+| FIFO depth | Parameterized, power-of-2 | Gray code requires power-of-2 |
+| Inter-stage interface | AXI-Stream (tvalid/tready/tdata/tlast) | Industry standard |
+| Parser architecture | Pipelined, cut-through | Minimizes latency (start parsing before full frame arrives) |
+| Target device | Xilinx Artix-7 (XC7A35T or XC7A100T) | Vivado is industry standard; Arty A7 has Ethernet PHY |
+| Verification | cocotb (Python) + SVA assertions | cocotb for stimulus generation; SVA for formal-friendly properties |
