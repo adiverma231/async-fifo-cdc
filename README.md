@@ -3,6 +3,14 @@
 ## One-Liner
 Designing a pipelined Ethernet packet parser with async FIFO CDC, targeting sub-10ns classification latency at 200+ MHz on Xilinx Artix-7.
 
+### What I'm Building
+
+```
+RX PHY Clock (125 MHz)              Logic Clock (200 MHz)
+       |                                    |
+[Ethernet Parser] --> [Async FIFO CDC] --> [Packet Classifier] --> [Market Data Decoder] --> [Top-of-Book Register]
+```
+
 ### RTL Module Breakdown
 
 ```
