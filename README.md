@@ -1,5 +1,32 @@
 # async-fifo-cdc
 
+Parameterized asynchronous FIFO with Gray-code pointer synchronization,
+per-domain reset synchronization, SystemVerilog assertions, and a
+self-checking testbench.
+
+## Run
+
+From the repo root:
+
+```powershell
+.\scripts\lint_async_fifo_verilator.ps1
+.\scripts\run_async_fifo_verilator.ps1
+```
+
+Manual equivalents:
+
+```powershell
+verilator -f sim/async_fifo_lint.f
+verilator -f sim/async_fifo_verilator.f
+.\obj_dir\Vtb_async_fifo.exe
+```
+
+The simulation should finish with:
+
+```text
+PASS: tb_async_fifo completed with no errors
+```
+
 ## One-Liner
 Designing a pipelined Ethernet packet parser with async FIFO CDC, targeting sub-10ns classification latency at 200+ MHz on Xilinx Artix-7.
 
