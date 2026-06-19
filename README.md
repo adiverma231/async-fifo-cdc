@@ -11,6 +11,8 @@ From the repo root:
 ```powershell
 .\scripts\lint_async_fifo_verilator.ps1
 .\scripts\run_async_fifo_verilator.ps1
+.\scripts\lint_eth_parser_verilator.ps1
+.\scripts\run_eth_parser_verilator.ps1
 ```
 
 Manual equivalents:
@@ -19,12 +21,16 @@ Manual equivalents:
 verilator -f sim/async_fifo_lint.f
 verilator -f sim/async_fifo_verilator.f
 .\obj_dir\Vtb_async_fifo.exe
+verilator -f sim/eth_parser_lint.f
+verilator -f sim/eth_parser_verilator.f
+.\obj_dir\Vtb_eth_frame_parser.exe
 ```
 
-The simulation should finish with:
+The simulations should finish with:
 
 ```text
 PASS: tb_async_fifo completed with no errors
+PASS: tb_eth_frame_parser completed with no errors
 ```
 
 ## One-Liner
