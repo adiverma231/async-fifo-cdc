@@ -376,7 +376,7 @@ module tb_eth_frame_parser;
             check_no_errors("output backpressure");
         end
     endtask
-    
+
     task automatic test_header_backpressure;
         begin
             $display("TEST: header backpressure");
@@ -426,7 +426,7 @@ module tb_eth_frame_parser;
                 $display("ERROR: short frame should not produce payload, got %0d bytes",
                          observed_payload.size());
                 errors++;
-            end
+            end 
         end
     endtask
 
