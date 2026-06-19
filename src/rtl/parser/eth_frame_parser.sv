@@ -21,7 +21,7 @@ module eth_frame_parser (
     output reg  [47:0] src_mac,
     output reg  [15:0] ether_type,
     output reg         hdr_valid,
-    input  wire        hdr_ready,
+    input  wire        hdr_ready, 
     output reg         frame_error
 );
 
