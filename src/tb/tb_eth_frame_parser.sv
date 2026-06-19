@@ -399,6 +399,35 @@ module tb_eth_frame_parser;
         end
     endtask
 
-    
+    task automatic test_short_frame_error;
+        int timeout;
+        begin
+            $display("TEST: short frame error");
+            build_short_frame();
+            send_frame();
+
+            timeout = 0;
+            while ((error_count == 0) && (timeout < 50)) begin
+                @(posedge clk);
+                timeout++;
+            end
+
+            if (error_count != 1) begin
+                $display("ERROR: short frame expected one frame_error, got %0d", error_count);
+                errors++;
+            end
+
+            if (hdr_count != 0) begin
+                $display("ERROR: short frame should not produce header, got %0d", hdr_count);
+                errors++;
+            end
+
+            if (observed_payload.size() != 0) begin
+                $display("ERROR: short frame should not produce payload, got %0d bytes",
+                         observed_payload.size());
+                errors++;
+            end
+        end
+    endtask
 
 endmodule
