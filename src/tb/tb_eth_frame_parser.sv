@@ -354,6 +354,29 @@ module tb_eth_frame_parser;
         end
     endtask
 
+    task automatic test_output_backpressure;
+        begin
+            $display("TEST: output backpressure");
+            build_valid_frame(17);
+
+            fork
+                send_frame();
+                begin
+                    repeat (5) @(posedge clk);
+                    m_axis_tready = 1'b0;
+                    repeat (6) @(posedge clk);
+                    m_axis_tready = 1'b1;
+                end
+            join
+
+            wait_for_header("output backpressure");
+            wait_for_payload_last("output backpressure");
+            check_header("output backpressure");
+            check_payload("output backpressure");
+            check_no_errors("output backpressure");
+        end
+    endtask
+    
     task automatic test_header_backpressure;
         begin
             $display("TEST: header backpressure");
