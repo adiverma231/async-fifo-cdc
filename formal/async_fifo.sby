@@ -1,0 +1,57 @@
+# =============================================================================
+# SymbiYosys configuration for the async_fifo CDC core.
+# -----------------------------------------------------------------------------
+# Proves the safety properties in fifo_props.sv (no overflow / no underflow,
+# gray-pointer CDC safety). Run from this directory:
+#
+#   sby -f async_fifo.sby            # all tasks
+#   sby -f async_fifo.sby bmc        # bounded model check only
+#   sby -f async_fifo.sby prove      # unbounded (k-induction)
+#
+# The two clocks are asynchronous; `multiclock on` selects the clk2fflogic
+# flow, so the solver toggles each clock independently (any phase/frequency).
+# Because there is no global sampling clock in that flow, the safety properties
+# in fifo_props.sv are immediate combinational invariants (no temporal SVA).
+#
+# Status (boolector engine): bmc PASS, cover PASS (full & empty reachable),
+# prove PASS by k-induction — i.e. no-overflow / no-write-into-full / no-
+# underflow are proven unboundedly for all reachable states and clock phases.
+# =============================================================================
+
+[tasks]
+bmc
+prove
+cover
+
+[options]
+multiclock on
+bmc:   mode bmc
+bmc:   depth 30
+prove: mode prove
+prove: depth 20
+cover: mode cover
+cover: depth 40
+
+[engines]
+smtbmc boolector
+
+[script]
+read -formal -sv reset_sync.sv
+read -formal -sv fifo_mem.sv
+read -formal -sv sync_r2w.sv
+read -formal -sv sync_w2r.sv
+read -formal -sv wptr_full.sv
+read -formal -sv rptr_empty.sv
+read -formal -sv async_fifo.sv
+read -formal -sv fifo_props.sv
+prep -top async_fifo
+
+[files]
+../src/rtl/fifo/reset_sync.sv
+../src/rtl/fifo/fifo_mem.sv
+../src/rtl/fifo/sync_r2w.sv
+../src/rtl/fifo/sync_w2r.sv
+../src/rtl/fifo/wptr_full.sv
+../src/rtl/fifo/rptr_empty.sv
+../src/rtl/fifo/async_fifo.sv
+fifo_props.sv
