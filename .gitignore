@@ -1,0 +1,14 @@
+# Simulation build output (cocotb + Verilator)
+sim/sim_build/
+sim/obj_dir/
+sim/results.xml
+sim/*.vcd
+obj_dir/
+
+# SymbiYosys working directories (formal/<sby-basename>[_<task>]/)
+formal/async_fifo/
+formal/async_fifo_*/
+
+# Python
+__pycache__/
+*.pyc
