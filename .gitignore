@@ -12,3 +12,6 @@ formal/async_fifo_*/
 # Python
 __pycache__/
 *.pyc
+
+# Sensitive
+ProjC_plan.md
