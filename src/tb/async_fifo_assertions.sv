@@ -43,7 +43,7 @@ module async_fifo_assertions #(
 
     property p_write_reset_state;
         @(posedge wr_clk)
-            !wr_rst_n |-> (wptr_gray == '0 && full == 1'b0 && almost_full == 1'b0);
+            !wr_rst_n |=> (wptr_gray == '0 && full == 1'b0 && almost_full == 1'b0);
     endproperty
 
     property p_write_flags_known;
@@ -68,7 +68,7 @@ module async_fifo_assertions #(
 
     property p_read_reset_state;
         @(posedge rd_clk)
-            !rd_rst_n |-> (rptr_gray == '0 && empty == 1'b1 && almost_empty == 1'b1);
+            !rd_rst_n |=> (rptr_gray == '0 && empty == 1'b1 && almost_empty == 1'b1);
     endproperty
 
     property p_read_flags_known;
