@@ -1,109 +1,79 @@
 # async-fifo-cdc
 
-Parameterized asynchronous FIFO with Gray-code pointer synchronization,
-per-domain reset synchronization, SystemVerilog assertions, and a
-self-checking testbench.
+Rough draft.
+
+An asynchronous FIFO for crossing data between two unrelated clock domains, an
+AXI-Stream wrapper around it, a shared definitions package, and an Ethernet
+frame parser. Verified with cocotb + Verilator and formally proven with
+SymbiYosys. (cocotb/Verilator/SymbiYosys is a POSIX flow — on Windows, run it
+under WSL.)
+
+## What's implemented
+
+**Async FIFO (CDC core)** — `src/rtl/fifo/`
+- `async_fifo.sv` — top wrapper, parameterized by `DATA_WIDTH` and `ADDR_WIDTH`
+  (depth = 2^`ADDR_WIDTH`). Also exposes `almost_full`/`almost_empty` with
+  configurable thresholds.
+- `fifo_mem.sv` — dual-clock memory (write port on the write clock, read port on
+  the read clock).
+- `wptr_full.sv` / `rptr_empty.sv` — binary+gray pointers; generate `full` /
+  `empty` in their own clock domains.
+- `sync_w2r.sv` / `sync_r2w.sv` — 2-flop synchronizers carrying each gray pointer
+  into the opposite clock domain.
+- `reset_sync.sv` — per-domain reset synchronizer (async assert, sync deassert).
+
+Pointers are `ADDR_WIDTH+1` bits (extra MSB separates full from empty) and cross
+domains in gray code (one bit changes per step, so a metastable sample can only
+resolve to the old or new value).
+
+**AXI-Stream wrapper** — `src/rtl/fifo/axis_async_fifo.sv`
+- Presents AXI-Stream (`tdata`/`tkeep`/`tlast`/`tvalid`/`tready`) on both clock
+  domains. Packs `{tlast, tkeep, tdata}` into the FIFO word so frame boundaries
+  survive the crossing. A 2-entry output buffer turns the FIFO core into a
+  full-throughput AXIS source with backpressure.
+
+**Shared definitions** — `src/rtl/top/pkg_defines.sv`
+- AXI-Stream width defaults, the `{tlast,tkeep,tdata}` packing convention,
+  packed Ethernet/IPv4/UDP header structs, and protocol constants.
+
+**Ethernet frame parser** — `src/rtl/parser/eth_frame_parser.sv`
+- 64-bit AXI-Stream, cut-through. Extracts destination MAC, source MAC, and
+  EtherType, emits the payload, and flags short/truncated frames. Assumes the
+  MAC/PHY layer has already stripped preamble/SFD and FCS (parsing starts at the
+  destination MAC).
+
+**Testbenches / properties**
+- `tb/test_async_fifo.py`, `tb/test_axis_async_fifo.py`, `tb/ref_model.py` —
+  cocotb tests + Python reference model.
+- `src/tb/async_fifo_assertions.sv` — SystemVerilog assertions bound into the
+  FIFO (active during simulation).
+- `src/tb/tb_eth_frame_parser.sv` — directed SystemVerilog testbench for the
+  parser.
+- `formal/async_fifo.sby` + `formal/fifo_props.sv` — SymbiYosys formal setup and
+  safety properties for the FIFO.
+
+## Verification results
+
+- **FIFO simulation:** directed fill/drain plus 11,000 random transactions across
+  5 asynchronous clock ratios — zero data loss, correct ordering, SVA active.
+- **AXIS wrapper:** `tlast`/`tkeep`/`tdata` verified intact across the CDC under
+  backpressure on both sides.
+- **FIFO formal (SymbiYosys, k-induction):** proven that the FIFO can never
+  overflow, never write when full, and never underflow — for all reachable
+  states and all clock-phase relationships. (bmc, cover, and prove all pass.)
 
 ## Run
 
-From the repo root:
+```bash
+# Simulation (Verilator + cocotb), from sim/
+cd sim
+make MODULE=test_async_fifo      TOPLEVEL=async_fifo
+make MODULE=test_axis_async_fifo TOPLEVEL=axis_async_fifo
 
-```powershell
-.\scripts\lint_async_fifo_verilator.ps1
-.\scripts\run_async_fifo_verilator.ps1
-.\scripts\lint_eth_parser_verilator.ps1
-.\scripts\run_eth_parser_verilator.ps1
+# Formal (SymbiYosys), from formal/
+cd formal
+sby -f async_fifo.sby
 ```
 
-Manual equivalents:
-
-```powershell
-verilator -f sim/async_fifo_lint.f
-verilator -f sim/async_fifo_verilator.f
-.\obj_dir\Vtb_async_fifo.exe
-verilator -f sim/eth_parser_lint.f
-verilator -f sim/eth_parser_verilator.f
-.\obj_dir\Vtb_eth_frame_parser.exe
-```
-
-The simulations should finish with:
-
-```text
-PASS: tb_async_fifo completed with no errors
-PASS: tb_eth_frame_parser completed with no errors
-```
-
-## One-Liner
-Designing a pipelined Ethernet packet parser with async FIFO CDC, targeting sub-10ns classification latency at 200+ MHz on Xilinx Artix-7.
-
-### What I'm Building
-
-```
-RX PHY Clock (125 MHz)              Logic Clock (200 MHz)
-       |                                    |
-[Ethernet Parser] --> [Async FIFO CDC] --> [Packet Classifier] --> [Market Data Decoder] --> [Top-of-Book Register]
-```
-
-### RTL Module Breakdown
-
-```
-src/
-  rtl/
-    fifo/
-      async_fifo.sv          -- Top wrapper, parameterized (DATA_WIDTH, ADDR_WIDTH)
-      fifo_mem.sv            -- Dual-port BRAM inference
-      sync_r2w.sv            -- 2-FF synchronizer, read ptr -> write domain
-      sync_w2r.sv            -- 2-FF synchronizer, write ptr -> read domain
-      rptr_empty.sv          -- Read pointer + gray conversion + empty flag
-      wptr_full.sv           -- Write pointer + gray conversion + full flag
-
-    parser/
-      eth_frame_parser.sv    -- Preamble strip, MAC extract, EtherType, FCS
-      ipv4_parser.sv         -- IP header extract, checksum validate
-      udp_parser.sv          -- Port/length/payload extraction
-      packet_classifier.sv   -- FSM: route by port/protocol to output channels
-
-    app/
-      market_data_decoder.sv -- Parse simplified ITCH-like messages
-      top_of_book.sv         -- Track best bid/ask (register-based)
-
-    top/
-      system_top.sv          -- Full integration with CDC boundary
-      pkg_defines.sv         -- Packed structs for headers, parameters
-
-  tb/
-    tb_async_fifo.sv         -- FIFO unit test (or cocotb equivalent)
-    tb_parser.sv             -- Parser unit test with PCAP-derived vectors
-    tb_system.sv             -- Integration test, end-to-end
-
-  constraints/
-    arty_a7.xdc             -- Pin/timing constraints (if targeting board)
-
-  docs/
-    block_diagram.png        -- Architecture diagram
-    timing_report.pdf        -- Vivado timing summary
-```
-### Key Design Decisions (locked in)
-
-| Decision | Choice | Rationale |
-|----------|--------|-----------|
-| Language | SystemVerilog | Self explanatory |
-| FIFO pointer encoding | Gray code (Cummings style) | Only 1 bit transitions per cycle, safe for CDC |
-| FIFO depth | Parameterized, power-of-2 | Gray code requires power-of-2 |
-| Inter-stage interface | AXI-Stream (tvalid/tready/tdata/tlast) | Industry standard |
-| Parser architecture | Pipelined, cut-through | Minimizes latency (start parsing before full frame arrives) |
-| Target device | Xilinx Artix-7 (XC7A35T or XC7A100T) | Vivado is industry standard; Arty A7 has Ethernet PHY |
-| Verification | cocotb (Python) + SVA assertions | cocotb for stimulus generation; SVA for formal-friendly properties |
-
-## Target Metrics
-
-| Metric | Target | Stretch |
-|--------|--------|---------|
-| FIFO throughput | 1 word/cycle, no bubbles | -- |
-| Parser latency | < 8 cycles (< 40ns @ 200 MHz) | < 5 cycles |
-| System Fmax | 200 MHz on Artix-7 | 250 MHz |
-| Resource usage | < 5% of XC7A100T | < 2% |
-| FIFO depth range | 16 to 4096 (parameterized) | -- |
-| Data width range | 8 to 512 bits (parameterized) | -- |
-| Verification coverage | > 95% line | + formal proof |
-| Clock domains | 2 (RX 125 MHz, logic 200 MHz) | 3 (add TX) |
+Simulation runs end with `TESTS=… PASS=… FAIL=0`; the formal run ends with
+`DONE (PASS)` for each task.
