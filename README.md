@@ -3,8 +3,7 @@
 An asynchronous FIFO for crossing data between two unrelated clock domains, an
 AXI-Stream wrapper around it, a shared definitions package, and an Ethernet
 frame parser. Verified with cocotb + Verilator and formally proven with
-SymbiYosys. (cocotb/Verilator/SymbiYosys is a POSIX flow — on Windows, run it
-under WSL.)
+SymbiYosys.
 
 ## What's implemented
 
