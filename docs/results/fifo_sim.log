@@ -1,0 +1,54 @@
+rm -f results.xml
+"make" -f Makefile results.xml
+make[1]: Entering directory '/mnt/c/Users/adity/Documents/GitHub/async-fifo-cdc/sim'
+mkdir -p sim_build
+/usr/local/bin/verilator -cc --exe -Mdir sim_build -DCOCOTB_SIM=1 --top-module async_fifo -Wno-fatal --timescale 1ns/1ps --vpi --public-flat-rw --prefix Vtop -o Vtop -LDFLAGS "-Wl,-rpath,/usr/local/lib/python3.10/dist-packages/cocotb/libs -L/usr/local/lib/python3.10/dist-packages/cocotb/libs -lcocotbvpi_verilator" --assert --trace /mnt/c/Users/adity/Documents/GitHub/async-fifo-cdc/src/rtl/top/pkg_defines.sv /mnt/c/Users/adity/Documents/GitHub/async-fifo-cdc/src/rtl/fifo/reset_sync.sv /mnt/c/Users/adity/Documents/GitHub/async-fifo-cdc/src/rtl/fifo/fifo_mem.sv /mnt/c/Users/adity/Documents/GitHub/async-fifo-cdc/src/rtl/fifo/sync_r2w.sv /mnt/c/Users/adity/Documents/GitHub/async-fifo-cdc/src/rtl/fifo/sync_w2r.sv /mnt/c/Users/adity/Documents/GitHub/async-fifo-cdc/src/rtl/fifo/wptr_full.sv /mnt/c/Users/adity/Documents/GitHub/async-fifo-cdc/src/rtl/fifo/rptr_empty.sv /mnt/c/Users/adity/Documents/GitHub/async-fifo-cdc/src/rtl/fifo/async_fifo.sv /mnt/c/Users/adity/Documents/GitHub/async-fifo-cdc/src/rtl/fifo/axis_async_fifo.sv /mnt/c/Users/adity/Documents/GitHub/async-fifo-cdc/src/tb/async_fifo_assertions.sv /usr/local/lib/python3.10/dist-packages/cocotb/share/lib/verilator/verilator.cpp
+- V e r i l a t i o n   R e p o r t: Verilator 5.048 2026-04-26 rev v5.048-56-gc233a3905
+- Verilator: Built from 0.239 MB sources in 12 modules, into 0.217 MB in 11 C++ files needing 0.000 MB
+- Verilator: Walltime 0.386 s (elab=0.009, cvt=0.050, bld=0.000); cpu 0.051 s on 1 threads; allocated 21.828 MB
+make -C sim_build  -f Vtop.mk
+make[2]: Entering directory '/mnt/c/Users/adity/Documents/GitHub/async-fifo-cdc/sim/sim_build'
+g++  -I.  -MMD -I/usr/local/share/verilator/include -I/usr/local/share/verilator/include/vltstd -DVERILATOR=1 -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TIMING=0 -DVM_TRACE=1 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=1 -DVM_TRACE_SAIF=0 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-int-in-bool-context -Wno-shadow -Wno-sign-compare -Wno-subobject-linkage -Wno-tautological-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable      -Os  -c -o verilator.o /usr/local/lib/python3.10/dist-packages/cocotb/share/lib/verilator/verilator.cpp
+g++ -Os  -I.  -MMD -I/usr/local/share/verilator/include -I/usr/local/share/verilator/include/vltstd -DVERILATOR=1 -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TIMING=0 -DVM_TRACE=1 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=1 -DVM_TRACE_SAIF=0 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-int-in-bool-context -Wno-shadow -Wno-sign-compare -Wno-subobject-linkage -Wno-tautological-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable      -c -o verilated.o /usr/local/share/verilator/include/verilated.cpp
+g++ -Os  -I.  -MMD -I/usr/local/share/verilator/include -I/usr/local/share/verilator/include/vltstd -DVERILATOR=1 -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TIMING=0 -DVM_TRACE=1 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=1 -DVM_TRACE_SAIF=0 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-int-in-bool-context -Wno-shadow -Wno-sign-compare -Wno-subobject-linkage -Wno-tautological-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable      -c -o verilated_dpi.o /usr/local/share/verilator/include/verilated_dpi.cpp
+g++ -Os  -I.  -MMD -I/usr/local/share/verilator/include -I/usr/local/share/verilator/include/vltstd -DVERILATOR=1 -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TIMING=0 -DVM_TRACE=1 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=1 -DVM_TRACE_SAIF=0 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-int-in-bool-context -Wno-shadow -Wno-sign-compare -Wno-subobject-linkage -Wno-tautological-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable      -c -o verilated_vpi.o /usr/local/share/verilator/include/verilated_vpi.cpp
+g++ -Os  -I.  -MMD -I/usr/local/share/verilator/include -I/usr/local/share/verilator/include/vltstd -DVERILATOR=1 -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TIMING=0 -DVM_TRACE=1 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=1 -DVM_TRACE_SAIF=0 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-int-in-bool-context -Wno-shadow -Wno-sign-compare -Wno-subobject-linkage -Wno-tautological-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable      -c -o verilated_vcd_c.o /usr/local/share/verilator/include/verilated_vcd_c.cpp
+g++ -Os  -I.  -MMD -I/usr/local/share/verilator/include -I/usr/local/share/verilator/include/vltstd -DVERILATOR=1 -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TIMING=0 -DVM_TRACE=1 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=1 -DVM_TRACE_SAIF=0 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-int-in-bool-context -Wno-shadow -Wno-sign-compare -Wno-subobject-linkage -Wno-tautological-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable      -c -o verilated_threads.o /usr/local/share/verilator/include/verilated_threads.cpp
+python3 /usr/local/share/verilator/bin/verilator_includer -DVL_INCLUDE_OPT=include Vtop.cpp Vtop___024root__0.cpp Vtop__Dpi.cpp Vtop__Trace__0.cpp Vtop___024root__Slow.cpp Vtop___024root__0__Slow.cpp Vtop___024unit__Slow.cpp Vtop_pkg_defines__Slow.cpp Vtop__Syms__Slow.cpp Vtop__Trace__0__Slow.cpp Vtop__TraceDecls__0__Slow.cpp > Vtop__ALL.cpp
+g++ -Os  -I.  -MMD -I/usr/local/share/verilator/include -I/usr/local/share/verilator/include/vltstd -DVERILATOR=1 -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TIMING=0 -DVM_TRACE=1 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=1 -DVM_TRACE_SAIF=0 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-int-in-bool-context -Wno-shadow -Wno-sign-compare -Wno-subobject-linkage -Wno-tautological-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable      -c -o Vtop__ALL.o Vtop__ALL.cpp
+g++    verilator.o verilated.o verilated_dpi.o verilated_vpi.o verilated_vcd_c.o verilated_threads.o Vtop__ALL.a   -Wl,-rpath,/usr/local/lib/python3.10/dist-packages/cocotb/libs -L/usr/local/lib/python3.10/dist-packages/cocotb/libs -lcocotbvpi_verilator  -pthread -lpthread -latomic   -o Vtop
+rm Vtop__ALL.verilator_deplist.tmp
+make[2]: Leaving directory '/mnt/c/Users/adity/Documents/GitHub/async-fifo-cdc/sim/sim_build'
+rm -f results.xml
+MODULE=test_async_fifo TESTCASE= TOPLEVEL=async_fifo TOPLEVEL_LANG=verilog \
+         sim_build/Vtop  --assert --trace  
+     -.--ns INFO     gpi                                ..mbed/gpi_embed.cpp:79   in set_program_name_in_venv        Did not detect Python virtual environment. Using system-wide Python interpreter
+     -.--ns INFO     gpi                                ../gpi/GpiCommon.cpp:101  in gpi_print_registered_impl       VPI registered
+     0.00ns INFO     cocotb                             Running on Verilator version 5.048 2026-04-26
+     0.00ns INFO     cocotb                             Running tests with cocotb v1.9.2 from /usr/local/lib/python3.10/dist-packages/cocotb
+     0.00ns INFO     cocotb                             Seeding Python random module with 1782508588
+     0.00ns INFO     cocotb.regression                  pytest not found, install it to enable better AssertionError messages
+     0.00ns INFO     cocotb.regression                  Found test test_async_fifo.test_fill_drain
+     0.00ns INFO     cocotb.regression                  Found test test_async_fifo.test_random_async_ratios
+     0.00ns INFO     cocotb.regression                  running test_fill_drain (1/2)
+                                                          Directed fill to full and drain to empty, checking status flags.
+   364.00ns INFO     cocotb.regression                  test_fill_drain passed
+   364.00ns INFO     cocotb.regression                  running test_random_async_ratios (2/2)
+                                                          Randomized traffic swept across several asynchronous clock ratios.
+   364.00ns INFO     cocotb.async_fifo                  ratio wr_half=4ns rd_half=3ns, 2200 transactions
+ 26848.00ns INFO     cocotb.async_fifo                  ratio wr_half=3ns rd_half=4ns, 2200 transactions
+ 53567.00ns INFO     cocotb.async_fifo                  ratio wr_half=5ns rd_half=2ns, 2200 transactions
+ 86501.00ns INFO     cocotb.async_fifo                  ratio wr_half=2ns rd_half=5ns, 2200 transactions
+118828.00ns INFO     cocotb.async_fifo                  ratio wr_half=7ns rd_half=4ns, 2200 transactions
+165133.00ns INFO     cocotb.regression                  test_random_async_ratios passed
+165133.00ns INFO     cocotb.regression                  **************************************************************************************************
+                                                        ** TEST                                      STATUS  SIM TIME (ns)  REAL TIME (s)  RATIO (ns/s) **
+                                                        **************************************************************************************************
+                                                        ** test_async_fifo.test_fill_drain            PASS         364.00           0.01      31036.16  **
+                                                        ** test_async_fifo.test_random_async_ratios   PASS      164769.00           4.87      33807.42  **
+                                                        **************************************************************************************************
+                                                        ** TESTS=2 PASS=2 FAIL=0 SKIP=0                         165133.00           4.93      33477.86  **
+                                                        **************************************************************************************************
+                                                        
+- :0: Verilog $finish
+make[1]: Leaving directory '/mnt/c/Users/adity/Documents/GitHub/async-fifo-cdc/sim'

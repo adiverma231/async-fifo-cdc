@@ -1,0 +1,187 @@
+SBY 17:17:05 [async_fifo_bmc] Removing directory '/mnt/c/Users/adity/Documents/GitHub/async-fifo-cdc/formal/async_fifo_bmc'.
+SBY 17:17:05 [async_fifo_bmc] Copy '/mnt/c/Users/adity/Documents/GitHub/async-fifo-cdc/formal/../src/rtl/fifo/reset_sync.sv' to '/mnt/c/Users/adity/Documents/GitHub/async-fifo-cdc/formal/async_fifo_bmc/src/reset_sync.sv'.
+SBY 17:17:05 [async_fifo_bmc] Copy '/mnt/c/Users/adity/Documents/GitHub/async-fifo-cdc/formal/../src/rtl/fifo/fifo_mem.sv' to '/mnt/c/Users/adity/Documents/GitHub/async-fifo-cdc/formal/async_fifo_bmc/src/fifo_mem.sv'.
+SBY 17:17:05 [async_fifo_bmc] Copy '/mnt/c/Users/adity/Documents/GitHub/async-fifo-cdc/formal/../src/rtl/fifo/sync_r2w.sv' to '/mnt/c/Users/adity/Documents/GitHub/async-fifo-cdc/formal/async_fifo_bmc/src/sync_r2w.sv'.
+SBY 17:17:05 [async_fifo_bmc] Copy '/mnt/c/Users/adity/Documents/GitHub/async-fifo-cdc/formal/../src/rtl/fifo/sync_w2r.sv' to '/mnt/c/Users/adity/Documents/GitHub/async-fifo-cdc/formal/async_fifo_bmc/src/sync_w2r.sv'.
+SBY 17:17:05 [async_fifo_bmc] Copy '/mnt/c/Users/adity/Documents/GitHub/async-fifo-cdc/formal/../src/rtl/fifo/wptr_full.sv' to '/mnt/c/Users/adity/Documents/GitHub/async-fifo-cdc/formal/async_fifo_bmc/src/wptr_full.sv'.
+SBY 17:17:05 [async_fifo_bmc] Copy '/mnt/c/Users/adity/Documents/GitHub/async-fifo-cdc/formal/../src/rtl/fifo/rptr_empty.sv' to '/mnt/c/Users/adity/Documents/GitHub/async-fifo-cdc/formal/async_fifo_bmc/src/rptr_empty.sv'.
+SBY 17:17:05 [async_fifo_bmc] Copy '/mnt/c/Users/adity/Documents/GitHub/async-fifo-cdc/formal/../src/rtl/fifo/async_fifo.sv' to '/mnt/c/Users/adity/Documents/GitHub/async-fifo-cdc/formal/async_fifo_bmc/src/async_fifo.sv'.
+SBY 17:17:05 [async_fifo_bmc] Copy '/mnt/c/Users/adity/Documents/GitHub/async-fifo-cdc/formal/fifo_props.sv' to '/mnt/c/Users/adity/Documents/GitHub/async-fifo-cdc/formal/async_fifo_bmc/src/fifo_props.sv'.
+SBY 17:17:05 [async_fifo_bmc] engine_0: smtbmc boolector
+SBY 17:17:05 [async_fifo_prove] Removing directory '/mnt/c/Users/adity/Documents/GitHub/async-fifo-cdc/formal/async_fifo_prove'.
+SBY 17:17:05 [async_fifo_prove] Copy '/mnt/c/Users/adity/Documents/GitHub/async-fifo-cdc/formal/../src/rtl/fifo/reset_sync.sv' to '/mnt/c/Users/adity/Documents/GitHub/async-fifo-cdc/formal/async_fifo_prove/src/reset_sync.sv'.
+SBY 17:17:05 [async_fifo_prove] Copy '/mnt/c/Users/adity/Documents/GitHub/async-fifo-cdc/formal/../src/rtl/fifo/fifo_mem.sv' to '/mnt/c/Users/adity/Documents/GitHub/async-fifo-cdc/formal/async_fifo_prove/src/fifo_mem.sv'.
+SBY 17:17:05 [async_fifo_prove] Copy '/mnt/c/Users/adity/Documents/GitHub/async-fifo-cdc/formal/../src/rtl/fifo/sync_r2w.sv' to '/mnt/c/Users/adity/Documents/GitHub/async-fifo-cdc/formal/async_fifo_prove/src/sync_r2w.sv'.
+SBY 17:17:05 [async_fifo_prove] Copy '/mnt/c/Users/adity/Documents/GitHub/async-fifo-cdc/formal/../src/rtl/fifo/sync_w2r.sv' to '/mnt/c/Users/adity/Documents/GitHub/async-fifo-cdc/formal/async_fifo_prove/src/sync_w2r.sv'.
+SBY 17:17:05 [async_fifo_prove] Copy '/mnt/c/Users/adity/Documents/GitHub/async-fifo-cdc/formal/../src/rtl/fifo/wptr_full.sv' to '/mnt/c/Users/adity/Documents/GitHub/async-fifo-cdc/formal/async_fifo_prove/src/wptr_full.sv'.
+SBY 17:17:05 [async_fifo_prove] Copy '/mnt/c/Users/adity/Documents/GitHub/async-fifo-cdc/formal/../src/rtl/fifo/rptr_empty.sv' to '/mnt/c/Users/adity/Documents/GitHub/async-fifo-cdc/formal/async_fifo_prove/src/rptr_empty.sv'.
+SBY 17:17:05 [async_fifo_prove] Copy '/mnt/c/Users/adity/Documents/GitHub/async-fifo-cdc/formal/../src/rtl/fifo/async_fifo.sv' to '/mnt/c/Users/adity/Documents/GitHub/async-fifo-cdc/formal/async_fifo_prove/src/async_fifo.sv'.
+SBY 17:17:05 [async_fifo_prove] Copy '/mnt/c/Users/adity/Documents/GitHub/async-fifo-cdc/formal/fifo_props.sv' to '/mnt/c/Users/adity/Documents/GitHub/async-fifo-cdc/formal/async_fifo_prove/src/fifo_props.sv'.
+SBY 17:17:05 [async_fifo_prove] engine_0: smtbmc boolector
+SBY 17:17:05 [async_fifo_cover] Removing directory '/mnt/c/Users/adity/Documents/GitHub/async-fifo-cdc/formal/async_fifo_cover'.
+SBY 17:17:05 [async_fifo_cover] Copy '/mnt/c/Users/adity/Documents/GitHub/async-fifo-cdc/formal/../src/rtl/fifo/reset_sync.sv' to '/mnt/c/Users/adity/Documents/GitHub/async-fifo-cdc/formal/async_fifo_cover/src/reset_sync.sv'.
+SBY 17:17:05 [async_fifo_cover] Copy '/mnt/c/Users/adity/Documents/GitHub/async-fifo-cdc/formal/../src/rtl/fifo/fifo_mem.sv' to '/mnt/c/Users/adity/Documents/GitHub/async-fifo-cdc/formal/async_fifo_cover/src/fifo_mem.sv'.
+SBY 17:17:05 [async_fifo_cover] Copy '/mnt/c/Users/adity/Documents/GitHub/async-fifo-cdc/formal/../src/rtl/fifo/sync_r2w.sv' to '/mnt/c/Users/adity/Documents/GitHub/async-fifo-cdc/formal/async_fifo_cover/src/sync_r2w.sv'.
+SBY 17:17:05 [async_fifo_cover] Copy '/mnt/c/Users/adity/Documents/GitHub/async-fifo-cdc/formal/../src/rtl/fifo/sync_w2r.sv' to '/mnt/c/Users/adity/Documents/GitHub/async-fifo-cdc/formal/async_fifo_cover/src/sync_w2r.sv'.
+SBY 17:17:05 [async_fifo_cover] Copy '/mnt/c/Users/adity/Documents/GitHub/async-fifo-cdc/formal/../src/rtl/fifo/wptr_full.sv' to '/mnt/c/Users/adity/Documents/GitHub/async-fifo-cdc/formal/async_fifo_cover/src/wptr_full.sv'.
+SBY 17:17:05 [async_fifo_cover] Copy '/mnt/c/Users/adity/Documents/GitHub/async-fifo-cdc/formal/../src/rtl/fifo/rptr_empty.sv' to '/mnt/c/Users/adity/Documents/GitHub/async-fifo-cdc/formal/async_fifo_cover/src/rptr_empty.sv'.
+SBY 17:17:05 [async_fifo_cover] Copy '/mnt/c/Users/adity/Documents/GitHub/async-fifo-cdc/formal/../src/rtl/fifo/async_fifo.sv' to '/mnt/c/Users/adity/Documents/GitHub/async-fifo-cdc/formal/async_fifo_cover/src/async_fifo.sv'.
+SBY 17:17:05 [async_fifo_cover] Copy '/mnt/c/Users/adity/Documents/GitHub/async-fifo-cdc/formal/fifo_props.sv' to '/mnt/c/Users/adity/Documents/GitHub/async-fifo-cdc/formal/async_fifo_cover/src/fifo_props.sv'.
+SBY 17:17:05 [async_fifo_cover] engine_0: smtbmc boolector
+SBY 17:17:05 [async_fifo_bmc] base: starting process "cd async_fifo_bmc/src; yosys -ql ../model/design.log ../model/design.ys"
+SBY 17:17:05 [async_fifo_prove] base: starting process "cd async_fifo_prove/src; yosys -ql ../model/design.log ../model/design.ys"
+SBY 17:17:05 [async_fifo_cover] base: starting process "cd async_fifo_cover/src; yosys -ql ../model/design.log ../model/design.ys"
+SBY 17:17:05 [async_fifo_cover] base: finished (returncode=0)
+SBY 17:17:05 [async_fifo_bmc] base: finished (returncode=0)
+SBY 17:17:05 [async_fifo_cover] prep: starting process "cd async_fifo_cover/model; yosys -ql design_prep.log design_prep.ys"
+SBY 17:17:05 [async_fifo_prove] base: finished (returncode=0)
+SBY 17:17:05 [async_fifo_bmc] prep: starting process "cd async_fifo_bmc/model; yosys -ql design_prep.log design_prep.ys"
+SBY 17:17:05 [async_fifo_prove] prep: starting process "cd async_fifo_prove/model; yosys -ql design_prep.log design_prep.ys"
+SBY 17:17:05 [async_fifo_cover] prep: finished (returncode=0)
+SBY 17:17:05 [async_fifo_cover] smt2: starting process "cd async_fifo_cover/model; yosys -ql design_smt2.log design_smt2.ys"
+SBY 17:17:05 [async_fifo_bmc] prep: finished (returncode=0)
+SBY 17:17:05 [async_fifo_bmc] smt2: starting process "cd async_fifo_bmc/model; yosys -ql design_smt2.log design_smt2.ys"
+SBY 17:17:05 [async_fifo_prove] prep: finished (returncode=0)
+SBY 17:17:05 [async_fifo_prove] smt2: starting process "cd async_fifo_prove/model; yosys -ql design_smt2.log design_smt2.ys"
+SBY 17:17:05 [async_fifo_cover] smt2: finished (returncode=0)
+SBY 17:17:05 [async_fifo_bmc] smt2: finished (returncode=0)
+SBY 17:17:05 [async_fifo_cover] engine_0: starting process "cd async_fifo_cover; yosys-smtbmc -s boolector --presat --unroll -c --noprogress -t 40  --append 0 --dump-vcd engine_0/trace%.vcd --dump-yw engine_0/trace%.yw --dump-vlogtb engine_0/trace%_tb.v --dump-smtc engine_0/trace%.smtc model/design_smt2.smt2"
+SBY 17:17:05 [async_fifo_prove] smt2: finished (returncode=0)
+SBY 17:17:05 [async_fifo_bmc] engine_0: starting process "cd async_fifo_bmc; yosys-smtbmc -s boolector --presat --unroll --noprogress -t 30  --append 0 --dump-vcd engine_0/trace.vcd --dump-yw engine_0/trace.yw --dump-vlogtb engine_0/trace_tb.v --dump-smtc engine_0/trace.smtc model/design_smt2.smt2"
+SBY 17:17:05 [async_fifo_prove] engine_0.basecase: starting process "cd async_fifo_prove; yosys-smtbmc -s boolector --presat --unroll --noprogress -t 20  --append 0 --dump-vcd engine_0/trace.vcd --dump-yw engine_0/trace.yw --dump-vlogtb engine_0/trace_tb.v --dump-smtc engine_0/trace.smtc model/design_smt2.smt2"
+SBY 17:17:06 [async_fifo_cover] engine_0: ##   0:00:00  Solver: boolector
+SBY 17:17:06 [async_fifo_bmc] engine_0: ##   0:00:00  Solver: boolector
+SBY 17:17:06 [async_fifo_prove] engine_0.induction: starting process "cd async_fifo_prove; yosys-smtbmc -s boolector --presat --unroll -i --noprogress -t 20  --append 0 --dump-vcd engine_0/trace_induct.vcd --dump-yw engine_0/trace_induct.yw --dump-vlogtb engine_0/trace_induct_tb.v --dump-smtc engine_0/trace_induct.smtc model/design_smt2.smt2"
+SBY 17:17:06 [async_fifo_prove] engine_0.basecase: ##   0:00:00  Solver: boolector
+SBY 17:17:06 [async_fifo_bmc] engine_0: ##   0:00:00  Checking assumptions in step 0..
+SBY 17:17:06 [async_fifo_cover] engine_0: ##   0:00:00  Status: passed
+SBY 17:17:06 [async_fifo_prove] engine_0.basecase: ##   0:00:00  Checking assumptions in step 0..
+SBY 17:17:06 [async_fifo_bmc] engine_0: ##   0:00:00  Checking assertions in step 0..
+SBY 17:17:06 [async_fifo_prove] engine_0.basecase: ##   0:00:00  Checking assertions in step 0..
+SBY 17:17:06 [async_fifo_cover] engine_0: finished (returncode=0)
+SBY 17:17:06 [async_fifo_cover] engine_0: Status returned by engine: pass
+SBY 17:17:06 [async_fifo_cover] summary: Elapsed clock time [H:MM:SS (secs)]: 0:00:00 (0)
+SBY 17:17:06 [async_fifo_cover] summary: Elapsed process time [H:MM:SS (secs)]: 0:00:00 (0)
+SBY 17:17:06 [async_fifo_cover] summary: engine_0 (smtbmc boolector) returned pass
+SBY 17:17:06 [async_fifo_cover] summary: engine_0 did not produce any traces
+SBY 17:17:06 [async_fifo_cover] DONE (PASS, rc=0)
+SBY 17:17:06 [async_fifo_bmc] engine_0: ##   0:00:00  Checking assumptions in step 1..
+SBY 17:17:06 [async_fifo_bmc] engine_0: ##   0:00:00  Checking assertions in step 1..
+SBY 17:17:06 [async_fifo_bmc] engine_0: ##   0:00:00  Checking assumptions in step 2..
+SBY 17:17:06 [async_fifo_bmc] engine_0: ##   0:00:00  Checking assertions in step 2..
+SBY 17:17:06 [async_fifo_prove] engine_0.basecase: ##   0:00:00  Checking assumptions in step 1..
+SBY 17:17:06 [async_fifo_prove] engine_0.basecase: ##   0:00:00  Checking assertions in step 1..
+SBY 17:17:06 [async_fifo_prove] engine_0.basecase: ##   0:00:00  Checking assumptions in step 2..
+SBY 17:17:06 [async_fifo_prove] engine_0.basecase: ##   0:00:00  Checking assertions in step 2..
+SBY 17:17:06 [async_fifo_prove] engine_0.basecase: ##   0:00:00  Checking assumptions in step 3..
+SBY 17:17:06 [async_fifo_bmc] engine_0: ##   0:00:00  Checking assumptions in step 3..
+SBY 17:17:06 [async_fifo_prove] engine_0.basecase: ##   0:00:00  Checking assertions in step 3..
+SBY 17:17:06 [async_fifo_bmc] engine_0: ##   0:00:00  Checking assertions in step 3..
+SBY 17:17:06 [async_fifo_prove] engine_0.basecase: ##   0:00:00  Checking assumptions in step 4..
+SBY 17:17:06 [async_fifo_prove] engine_0.induction: ##   0:00:00  Solver: boolector
+SBY 17:17:06 [async_fifo_prove] engine_0.basecase: ##   0:00:00  Checking assertions in step 4..
+SBY 17:17:06 [async_fifo_bmc] engine_0: ##   0:00:00  Checking assumptions in step 4..
+SBY 17:17:06 [async_fifo_bmc] engine_0: ##   0:00:00  Checking assertions in step 4..
+SBY 17:17:06 [async_fifo_prove] engine_0.basecase: ##   0:00:00  Checking assumptions in step 5..
+SBY 17:17:06 [async_fifo_prove] engine_0.basecase: ##   0:00:00  Checking assertions in step 5..
+SBY 17:17:06 [async_fifo_bmc] engine_0: ##   0:00:00  Checking assumptions in step 5..
+SBY 17:17:06 [async_fifo_bmc] engine_0: ##   0:00:00  Checking assertions in step 5..
+SBY 17:17:06 [async_fifo_prove] engine_0.basecase: ##   0:00:00  Checking assumptions in step 6..
+SBY 17:17:06 [async_fifo_prove] engine_0.induction: ##   0:00:00  Trying induction in step 20..
+SBY 17:17:06 [async_fifo_prove] engine_0.induction: ##   0:00:00  Temporal induction successful.
+SBY 17:17:06 [async_fifo_prove] engine_0.induction: ##   0:00:00  Status: passed
+SBY 17:17:06 [async_fifo_prove] engine_0.basecase: ##   0:00:00  Checking assertions in step 6..
+SBY 17:17:06 [async_fifo_bmc] engine_0: ##   0:00:00  Checking assumptions in step 6..
+SBY 17:17:06 [async_fifo_bmc] engine_0: ##   0:00:00  Checking assertions in step 6..
+SBY 17:17:06 [async_fifo_prove] engine_0.induction: finished (returncode=0)
+SBY 17:17:06 [async_fifo_prove] engine_0.induction: Status returned by engine for induction: pass
+SBY 17:17:06 [async_fifo_prove] engine_0.basecase: ##   0:00:00  Checking assumptions in step 7..
+SBY 17:17:06 [async_fifo_prove] engine_0.basecase: ##   0:00:00  Checking assertions in step 7..
+SBY 17:17:06 [async_fifo_bmc] engine_0: ##   0:00:00  Checking assumptions in step 7..
+SBY 17:17:06 [async_fifo_bmc] engine_0: ##   0:00:00  Checking assertions in step 7..
+SBY 17:17:06 [async_fifo_prove] engine_0.basecase: ##   0:00:00  Checking assumptions in step 8..
+SBY 17:17:06 [async_fifo_prove] engine_0.basecase: ##   0:00:00  Checking assertions in step 8..
+SBY 17:17:06 [async_fifo_bmc] engine_0: ##   0:00:00  Checking assumptions in step 8..
+SBY 17:17:06 [async_fifo_bmc] engine_0: ##   0:00:00  Checking assertions in step 8..
+SBY 17:17:06 [async_fifo_prove] engine_0.basecase: ##   0:00:00  Checking assumptions in step 9..
+SBY 17:17:06 [async_fifo_prove] engine_0.basecase: ##   0:00:00  Checking assertions in step 9..
+SBY 17:17:06 [async_fifo_bmc] engine_0: ##   0:00:00  Checking assumptions in step 9..
+SBY 17:17:06 [async_fifo_bmc] engine_0: ##   0:00:00  Checking assertions in step 9..
+SBY 17:17:06 [async_fifo_prove] engine_0.basecase: ##   0:00:00  Checking assumptions in step 10..
+SBY 17:17:06 [async_fifo_prove] engine_0.basecase: ##   0:00:00  Checking assertions in step 10..
+SBY 17:17:06 [async_fifo_bmc] engine_0: ##   0:00:00  Checking assumptions in step 10..
+SBY 17:17:06 [async_fifo_bmc] engine_0: ##   0:00:00  Checking assertions in step 10..
+SBY 17:17:06 [async_fifo_prove] engine_0.basecase: ##   0:00:00  Checking assumptions in step 11..
+SBY 17:17:06 [async_fifo_prove] engine_0.basecase: ##   0:00:00  Checking assertions in step 11..
+SBY 17:17:06 [async_fifo_bmc] engine_0: ##   0:00:00  Checking assumptions in step 11..
+SBY 17:17:06 [async_fifo_bmc] engine_0: ##   0:00:00  Checking assertions in step 11..
+SBY 17:17:06 [async_fifo_prove] engine_0.basecase: ##   0:00:00  Checking assumptions in step 12..
+SBY 17:17:06 [async_fifo_prove] engine_0.basecase: ##   0:00:00  Checking assertions in step 12..
+SBY 17:17:06 [async_fifo_bmc] engine_0: ##   0:00:00  Checking assumptions in step 12..
+SBY 17:17:06 [async_fifo_bmc] engine_0: ##   0:00:00  Checking assertions in step 12..
+SBY 17:17:06 [async_fifo_prove] engine_0.basecase: ##   0:00:00  Checking assumptions in step 13..
+SBY 17:17:06 [async_fifo_bmc] engine_0: ##   0:00:00  Checking assumptions in step 13..
+SBY 17:17:06 [async_fifo_prove] engine_0.basecase: ##   0:00:00  Checking assertions in step 13..
+SBY 17:17:06 [async_fifo_bmc] engine_0: ##   0:00:00  Checking assertions in step 13..
+SBY 17:17:06 [async_fifo_prove] engine_0.basecase: ##   0:00:00  Checking assumptions in step 14..
+SBY 17:17:06 [async_fifo_bmc] engine_0: ##   0:00:00  Checking assumptions in step 14..
+SBY 17:17:06 [async_fifo_prove] engine_0.basecase: ##   0:00:00  Checking assertions in step 14..
+SBY 17:17:06 [async_fifo_bmc] engine_0: ##   0:00:00  Checking assertions in step 14..
+SBY 17:17:06 [async_fifo_prove] engine_0.basecase: ##   0:00:00  Checking assumptions in step 15..
+SBY 17:17:06 [async_fifo_bmc] engine_0: ##   0:00:00  Checking assumptions in step 15..
+SBY 17:17:06 [async_fifo_prove] engine_0.basecase: ##   0:00:00  Checking assertions in step 15..
+SBY 17:17:06 [async_fifo_bmc] engine_0: ##   0:00:00  Checking assertions in step 15..
+SBY 17:17:06 [async_fifo_prove] engine_0.basecase: ##   0:00:00  Checking assumptions in step 16..
+SBY 17:17:06 [async_fifo_bmc] engine_0: ##   0:00:00  Checking assumptions in step 16..
+SBY 17:17:06 [async_fifo_prove] engine_0.basecase: ##   0:00:00  Checking assertions in step 16..
+SBY 17:17:06 [async_fifo_bmc] engine_0: ##   0:00:00  Checking assertions in step 16..
+SBY 17:17:06 [async_fifo_prove] engine_0.basecase: ##   0:00:00  Checking assumptions in step 17..
+SBY 17:17:06 [async_fifo_bmc] engine_0: ##   0:00:00  Checking assumptions in step 17..
+SBY 17:17:06 [async_fifo_prove] engine_0.basecase: ##   0:00:00  Checking assertions in step 17..
+SBY 17:17:06 [async_fifo_bmc] engine_0: ##   0:00:00  Checking assertions in step 17..
+SBY 17:17:06 [async_fifo_prove] engine_0.basecase: ##   0:00:00  Checking assumptions in step 18..
+SBY 17:17:06 [async_fifo_bmc] engine_0: ##   0:00:00  Checking assumptions in step 18..
+SBY 17:17:06 [async_fifo_prove] engine_0.basecase: ##   0:00:00  Checking assertions in step 18..
+SBY 17:17:06 [async_fifo_bmc] engine_0: ##   0:00:00  Checking assertions in step 18..
+SBY 17:17:06 [async_fifo_prove] engine_0.basecase: ##   0:00:00  Checking assumptions in step 19..
+SBY 17:17:06 [async_fifo_bmc] engine_0: ##   0:00:00  Checking assumptions in step 19..
+SBY 17:17:06 [async_fifo_prove] engine_0.basecase: ##   0:00:00  Checking assertions in step 19..
+SBY 17:17:06 [async_fifo_bmc] engine_0: ##   0:00:00  Checking assertions in step 19..
+SBY 17:17:06 [async_fifo_prove] engine_0.basecase: ##   0:00:00  Status: passed
+SBY 17:17:06 [async_fifo_prove] engine_0.basecase: finished (returncode=0)
+SBY 17:17:06 [async_fifo_prove] engine_0.basecase: Status returned by engine for basecase: pass
+SBY 17:17:06 [async_fifo_prove] summary: Elapsed clock time [H:MM:SS (secs)]: 0:00:00 (0)
+SBY 17:17:06 [async_fifo_prove] summary: Elapsed process time [H:MM:SS (secs)]: 0:00:01 (1)
+SBY 17:17:06 [async_fifo_prove] summary: engine_0 (smtbmc boolector) returned pass for basecase
+SBY 17:17:06 [async_fifo_prove] summary: engine_0 (smtbmc boolector) returned pass for induction
+SBY 17:17:06 [async_fifo_prove] summary: engine_0 did not produce any traces
+SBY 17:17:06 [async_fifo_prove] summary: successful proof by k-induction.
+SBY 17:17:06 [async_fifo_prove] DONE (PASS, rc=0)
+SBY 17:17:06 [async_fifo_bmc] engine_0: ##   0:00:00  Checking assumptions in step 20..
+SBY 17:17:06 [async_fifo_bmc] engine_0: ##   0:00:00  Checking assertions in step 20..
+SBY 17:17:06 [async_fifo_bmc] engine_0: ##   0:00:00  Checking assumptions in step 21..
+SBY 17:17:06 [async_fifo_bmc] engine_0: ##   0:00:00  Checking assertions in step 21..
+SBY 17:17:06 [async_fifo_bmc] engine_0: ##   0:00:00  Checking assumptions in step 22..
+SBY 17:17:06 [async_fifo_bmc] engine_0: ##   0:00:00  Checking assertions in step 22..
+SBY 17:17:06 [async_fifo_bmc] engine_0: ##   0:00:00  Checking assumptions in step 23..
+SBY 17:17:06 [async_fifo_bmc] engine_0: ##   0:00:00  Checking assertions in step 23..
+SBY 17:17:06 [async_fifo_bmc] engine_0: ##   0:00:00  Checking assumptions in step 24..
+SBY 17:17:06 [async_fifo_bmc] engine_0: ##   0:00:00  Checking assertions in step 24..
+SBY 17:17:06 [async_fifo_bmc] engine_0: ##   0:00:00  Checking assumptions in step 25..
+SBY 17:17:06 [async_fifo_bmc] engine_0: ##   0:00:00  Checking assertions in step 25..
+SBY 17:17:06 [async_fifo_bmc] engine_0: ##   0:00:00  Checking assumptions in step 26..
+SBY 17:17:06 [async_fifo_bmc] engine_0: ##   0:00:00  Checking assertions in step 26..
+SBY 17:17:06 [async_fifo_bmc] engine_0: ##   0:00:00  Checking assumptions in step 27..
+SBY 17:17:06 [async_fifo_bmc] engine_0: ##   0:00:00  Checking assertions in step 27..
+SBY 17:17:06 [async_fifo_bmc] engine_0: ##   0:00:00  Checking assumptions in step 28..
+SBY 17:17:06 [async_fifo_bmc] engine_0: ##   0:00:00  Checking assertions in step 28..
+SBY 17:17:06 [async_fifo_bmc] engine_0: ##   0:00:00  Checking assumptions in step 29..
+SBY 17:17:06 [async_fifo_bmc] engine_0: ##   0:00:00  Checking assertions in step 29..
+SBY 17:17:06 [async_fifo_bmc] engine_0: ##   0:00:00  Status: passed
+SBY 17:17:06 [async_fifo_bmc] engine_0: finished (returncode=0)
+SBY 17:17:06 [async_fifo_bmc] engine_0: Status returned by engine: pass
+SBY 17:17:06 [async_fifo_bmc] summary: Elapsed clock time [H:MM:SS (secs)]: 0:00:01 (1)
+SBY 17:17:06 [async_fifo_bmc] summary: Elapsed process time [H:MM:SS (secs)]: 0:00:01 (1)
+SBY 17:17:06 [async_fifo_bmc] summary: engine_0 (smtbmc boolector) returned pass
+SBY 17:17:06 [async_fifo_bmc] summary: engine_0 did not produce any traces
+SBY 17:17:06 [async_fifo_bmc] DONE (PASS, rc=0)
