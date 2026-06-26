@@ -62,6 +62,24 @@ resolve to the old or new value).
   overflow, never write when full, and never underflow — for all reachable
   states and all clock-phase relationships. (bmc, cover, and prove all pass.)
 
+Result captures are in `docs/results/` (raw logs/VCD alongside each image).
+
+Async FIFO core — fill/drain + 11k random transactions across 5 async ratios:
+
+![FIFO core sim](docs/results/fifo_sim.png)
+
+AXIS framing preserved across the CDC:
+
+![AXIS framing sim](docs/results/axis_sim.png)
+
+Formal proof (SymbiYosys, k-induction):
+
+![Formal proof](docs/results/formal.png)
+
+Fill-to-full then drain-to-empty waveform:
+
+![Fill/drain waveform](docs/results/waveform_fill_drain.png)
+
 ## Run
 
 ```bash
