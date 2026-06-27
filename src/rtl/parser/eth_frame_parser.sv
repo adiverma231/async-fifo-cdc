@@ -1,18 +1,29 @@
-// 64-bit AXI-Stream Ethernet parser.
-// Byte lane 0 is tdata[7:0]. Preamble/SFD and FCS are assumed to be handled
-// by the MAC/PHY layer; this block starts at destination MAC and emits payload.
-module eth_frame_parser (
+// =============================================================================
+// eth_frame_parser.sv
+// -----------------------------------------------------------------------------
+// AXI-Stream Ethernet frame parser. The datapath width comes from pkg_defines
+// (AXIS_DATA_WIDTH, default 64); the realignment FSM below is specialized for
+// the 64-bit / 14-byte-header case.
+//
+// Byte lane 0 is tdata[7:0]. Preamble/SFD and FCS are handled upstream by the
+// MAC/PHY layer -- this is the authoritative design decision (matches real
+// MII/GMII MAC behavior): the block starts at the destination MAC and emits the
+// Ethernet payload, exposing dst/src MAC and EtherType on a sideband.
+// =============================================================================
+module eth_frame_parser
+    import pkg_defines::*;
+(
     input  wire        clk,
     input  wire        rst_n,
 
-    input  wire [63:0] s_axis_tdata,
-    input  wire [7:0]  s_axis_tkeep,
+    input  wire [AXIS_DATA_WIDTH-1:0] s_axis_tdata,
+    input  wire [AXIS_KEEP_WIDTH-1:0] s_axis_tkeep,
     input  wire        s_axis_tvalid,
     output reg         s_axis_tready,
     input  wire        s_axis_tlast,
 
-    output reg  [63:0] m_axis_tdata,
-    output reg  [7:0]  m_axis_tkeep,
+    output reg  [AXIS_DATA_WIDTH-1:0] m_axis_tdata,
+    output reg  [AXIS_KEEP_WIDTH-1:0] m_axis_tkeep,
     output reg         m_axis_tvalid,
     input  wire        m_axis_tready,
     output reg         m_axis_tlast,
