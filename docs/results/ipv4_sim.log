@@ -1,0 +1,80 @@
+rm -f results.xml
+"make" -f Makefile results.xml
+make[1]: Entering directory '/mnt/c/Users/adity/Documents/GitHub/async-fifo-cdc/sim'
+mkdir -p sim_build
+/usr/local/bin/verilator -cc --exe -Mdir sim_build -DCOCOTB_SIM=1 --top-module ipv4_parser -Wno-fatal --timescale 1ns/1ps --vpi --public-flat-rw --prefix Vtop -o Vtop -LDFLAGS "-Wl,-rpath,/usr/local/lib/python3.10/dist-packages/cocotb/libs -L/usr/local/lib/python3.10/dist-packages/cocotb/libs -lcocotbvpi_verilator" --assert --trace /mnt/c/Users/adity/Documents/GitHub/async-fifo-cdc/src/rtl/top/pkg_defines.sv /mnt/c/Users/adity/Documents/GitHub/async-fifo-cdc/src/rtl/parser/ipv4_parser.sv /usr/local/lib/python3.10/dist-packages/cocotb/share/lib/verilator/verilator.cpp
+- V e r i l a t i o n   R e p o r t: Verilator 5.048 2026-04-26 rev v5.048-56-gc233a3905
+- Verilator: Built from 0.055 MB sources in 3 modules, into 0.111 MB in 11 C++ files needing 0.000 MB
+- Verilator: Walltime 0.167 s (elab=0.007, cvt=0.045, bld=0.000); cpu 0.033 s on 1 threads; allocated 21.168 MB
+make -C sim_build  -f Vtop.mk
+make[2]: Entering directory '/mnt/c/Users/adity/Documents/GitHub/async-fifo-cdc/sim/sim_build'
+g++  -I.  -MMD -I/usr/local/share/verilator/include -I/usr/local/share/verilator/include/vltstd -DVERILATOR=1 -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TIMING=0 -DVM_TRACE=1 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=1 -DVM_TRACE_SAIF=0 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-int-in-bool-context -Wno-shadow -Wno-sign-compare -Wno-subobject-linkage -Wno-tautological-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable      -Os  -c -o verilator.o /usr/local/lib/python3.10/dist-packages/cocotb/share/lib/verilator/verilator.cpp
+g++ -Os  -I.  -MMD -I/usr/local/share/verilator/include -I/usr/local/share/verilator/include/vltstd -DVERILATOR=1 -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TIMING=0 -DVM_TRACE=1 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=1 -DVM_TRACE_SAIF=0 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-int-in-bool-context -Wno-shadow -Wno-sign-compare -Wno-subobject-linkage -Wno-tautological-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable      -c -o verilated.o /usr/local/share/verilator/include/verilated.cpp
+g++ -Os  -I.  -MMD -I/usr/local/share/verilator/include -I/usr/local/share/verilator/include/vltstd -DVERILATOR=1 -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TIMING=0 -DVM_TRACE=1 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=1 -DVM_TRACE_SAIF=0 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-int-in-bool-context -Wno-shadow -Wno-sign-compare -Wno-subobject-linkage -Wno-tautological-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable      -c -o verilated_dpi.o /usr/local/share/verilator/include/verilated_dpi.cpp
+g++ -Os  -I.  -MMD -I/usr/local/share/verilator/include -I/usr/local/share/verilator/include/vltstd -DVERILATOR=1 -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TIMING=0 -DVM_TRACE=1 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=1 -DVM_TRACE_SAIF=0 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-int-in-bool-context -Wno-shadow -Wno-sign-compare -Wno-subobject-linkage -Wno-tautological-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable      -c -o verilated_vpi.o /usr/local/share/verilator/include/verilated_vpi.cpp
+g++ -Os  -I.  -MMD -I/usr/local/share/verilator/include -I/usr/local/share/verilator/include/vltstd -DVERILATOR=1 -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TIMING=0 -DVM_TRACE=1 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=1 -DVM_TRACE_SAIF=0 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-int-in-bool-context -Wno-shadow -Wno-sign-compare -Wno-subobject-linkage -Wno-tautological-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable      -c -o verilated_vcd_c.o /usr/local/share/verilator/include/verilated_vcd_c.cpp
+g++ -Os  -I.  -MMD -I/usr/local/share/verilator/include -I/usr/local/share/verilator/include/vltstd -DVERILATOR=1 -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TIMING=0 -DVM_TRACE=1 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=1 -DVM_TRACE_SAIF=0 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-int-in-bool-context -Wno-shadow -Wno-sign-compare -Wno-subobject-linkage -Wno-tautological-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable      -c -o verilated_threads.o /usr/local/share/verilator/include/verilated_threads.cpp
+python3 /usr/local/share/verilator/bin/verilator_includer -DVL_INCLUDE_OPT=include Vtop.cpp Vtop___024root__0.cpp Vtop__Dpi.cpp Vtop__Trace__0.cpp Vtop__ConstPool__0__Slow.cpp Vtop___024root__Slow.cpp Vtop___024root__0__Slow.cpp Vtop_pkg_defines__Slow.cpp Vtop__Syms__Slow.cpp Vtop__Trace__0__Slow.cpp Vtop__TraceDecls__0__Slow.cpp > Vtop__ALL.cpp
+g++ -Os  -I.  -MMD -I/usr/local/share/verilator/include -I/usr/local/share/verilator/include/vltstd -DVERILATOR=1 -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TIMING=0 -DVM_TRACE=1 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=1 -DVM_TRACE_SAIF=0 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-int-in-bool-context -Wno-shadow -Wno-sign-compare -Wno-subobject-linkage -Wno-tautological-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable      -c -o Vtop__ALL.o Vtop__ALL.cpp
+g++    verilator.o verilated.o verilated_dpi.o verilated_vpi.o verilated_vcd_c.o verilated_threads.o Vtop__ALL.a   -Wl,-rpath,/usr/local/lib/python3.10/dist-packages/cocotb/libs -L/usr/local/lib/python3.10/dist-packages/cocotb/libs -lcocotbvpi_verilator  -pthread -lpthread -latomic   -o Vtop
+rm Vtop__ALL.verilator_deplist.tmp
+make[2]: Leaving directory '/mnt/c/Users/adity/Documents/GitHub/async-fifo-cdc/sim/sim_build'
+rm -f results.xml
+MODULE=test_ipv4_parser TESTCASE= TOPLEVEL=ipv4_parser TOPLEVEL_LANG=verilog \
+         sim_build/Vtop  --assert --trace  
+     -.--ns INFO     gpi                                ..mbed/gpi_embed.cpp:79   in set_program_name_in_venv        Did not detect Python virtual environment. Using system-wide Python interpreter
+     -.--ns INFO     gpi                                ../gpi/GpiCommon.cpp:101  in gpi_print_registered_impl       VPI registered
+     0.00ns INFO     cocotb                             Running on Verilator version 5.048 2026-04-26
+     0.00ns INFO     cocotb                             Running tests with cocotb v1.9.2 from /usr/local/lib/python3.10/dist-packages/cocotb
+     0.00ns INFO     cocotb                             Seeding Python random module with 1782528059
+     0.00ns INFO     cocotb.regression                  pytest not found, install it to enable better AssertionError messages
+     0.00ns INFO     cocotb.regression                  Found test test_ipv4_parser.test_basic_packet
+     0.00ns INFO     cocotb.regression                  Found test test_ipv4_parser.test_realignment_lengths
+     0.00ns INFO     cocotb.regression                  Found test test_ipv4_parser.test_bad_checksum
+     0.00ns INFO     cocotb.regression                  Found test test_ipv4_parser.test_bad_version
+     0.00ns INFO     cocotb.regression                  Found test test_ipv4_parser.test_options_rejected
+     0.00ns INFO     cocotb.regression                  Found test test_ipv4_parser.test_truncated
+     0.00ns INFO     cocotb.regression                  Found test test_ipv4_parser.test_output_backpressure
+     0.00ns INFO     cocotb.regression                  Found test test_ipv4_parser.test_header_backpressure
+     0.00ns INFO     cocotb.regression                  Found test test_ipv4_parser.test_random_packets
+     0.00ns INFO     cocotb.regression                  Found test test_ipv4_parser.test_throughput_no_bubbles
+     0.00ns INFO     cocotb.regression                  running test_basic_packet (1/10)
+   170.00ns INFO     cocotb.regression                  test_basic_packet passed
+   170.00ns INFO     cocotb.regression                  running test_realignment_lengths (2/10)
+                                                          Payload lengths spanning the 4-byte carry / flush boundaries.
+  1510.00ns INFO     cocotb.regression                  test_realignment_lengths passed
+  1510.00ns INFO     cocotb.regression                  running test_bad_checksum (3/10)
+  1670.00ns INFO     cocotb.regression                  test_bad_checksum passed
+  1670.00ns INFO     cocotb.regression                  running test_bad_version (4/10)
+  1830.00ns INFO     cocotb.regression                  test_bad_version passed
+  1830.00ns INFO     cocotb.regression                  running test_options_rejected (5/10)
+  1990.01ns INFO     cocotb.regression                  test_options_rejected passed
+  1990.01ns INFO     cocotb.regression                  running test_truncated (6/10)
+  2200.01ns INFO     cocotb.regression                  test_truncated passed
+  2200.01ns INFO     cocotb.regression                  running test_output_backpressure (7/10)
+  2420.01ns INFO     cocotb.regression                  test_output_backpressure passed
+  2420.01ns INFO     cocotb.regression                  running test_header_backpressure (8/10)
+  2660.01ns INFO     cocotb.regression                  test_header_backpressure passed
+  2660.01ns INFO     cocotb.regression                  running test_random_packets (9/10)
+  9040.01ns INFO     cocotb.regression                  test_random_packets passed
+  9040.01ns INFO     cocotb.regression                  running test_throughput_no_bubbles (10/10)
+  9470.01ns INFO     cocotb.regression                  test_throughput_no_bubbles passed
+  9470.01ns INFO     cocotb.regression                  *****************************************************************************************************
+                                                        ** TEST                                         STATUS  SIM TIME (ns)  REAL TIME (s)  RATIO (ns/s) **
+                                                        *****************************************************************************************************
+                                                        ** test_ipv4_parser.test_basic_packet            PASS         170.00           0.01      28316.42  **
+                                                        ** test_ipv4_parser.test_realignment_lengths     PASS        1340.00           0.02      67195.57  **
+                                                        ** test_ipv4_parser.test_bad_checksum            PASS         160.00           0.00      67331.48  **
+                                                        ** test_ipv4_parser.test_bad_version             PASS         160.00           0.00      93701.88  **
+                                                        ** test_ipv4_parser.test_options_rejected        PASS         160.00           0.00      81433.42  **
+                                                        ** test_ipv4_parser.test_truncated               PASS         210.00           0.00      85890.59  **
+                                                        ** test_ipv4_parser.test_output_backpressure     PASS         220.00           0.00      76532.39  **
+                                                        ** test_ipv4_parser.test_header_backpressure     PASS         240.00           0.00      70266.45  **
+                                                        ** test_ipv4_parser.test_random_packets          PASS        6380.00           0.09      72732.68  **
+                                                        ** test_ipv4_parser.test_throughput_no_bubbles   PASS         430.00           0.01      66880.07  **
+                                                        *****************************************************************************************************
+                                                        ** TESTS=10 PASS=10 FAIL=0 SKIP=0                            9470.01           0.20      48381.44  **
+                                                        *****************************************************************************************************
+                                                        
+- :0: Verilog $finish
+make[1]: Leaving directory '/mnt/c/Users/adity/Documents/GitHub/async-fifo-cdc/sim'

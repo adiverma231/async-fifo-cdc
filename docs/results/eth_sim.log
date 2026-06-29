@@ -1,0 +1,73 @@
+rm -f results.xml
+"make" -f Makefile results.xml
+make[1]: Entering directory '/mnt/c/Users/adity/Documents/GitHub/async-fifo-cdc/sim'
+mkdir -p sim_build
+/usr/local/bin/verilator -cc --exe -Mdir sim_build -DCOCOTB_SIM=1 --top-module eth_frame_parser -Wno-fatal --timescale 1ns/1ps --vpi --public-flat-rw --prefix Vtop -o Vtop -LDFLAGS "-Wl,-rpath,/usr/local/lib/python3.10/dist-packages/cocotb/libs -L/usr/local/lib/python3.10/dist-packages/cocotb/libs -lcocotbvpi_verilator" --assert --trace /mnt/c/Users/adity/Documents/GitHub/async-fifo-cdc/src/rtl/top/pkg_defines.sv /mnt/c/Users/adity/Documents/GitHub/async-fifo-cdc/src/rtl/parser/eth_frame_parser.sv /usr/local/lib/python3.10/dist-packages/cocotb/share/lib/verilator/verilator.cpp
+- V e r i l a t i o n   R e p o r t: Verilator 5.048 2026-04-26 rev v5.048-56-gc233a3905
+- Verilator: Built from 0.053 MB sources in 3 modules, into 0.089 MB in 11 C++ files needing 0.000 MB
+- Verilator: Walltime 0.161 s (elab=0.008, cvt=0.042, bld=0.000); cpu 0.029 s on 1 threads; allocated 20.957 MB
+make -C sim_build  -f Vtop.mk
+make[2]: Entering directory '/mnt/c/Users/adity/Documents/GitHub/async-fifo-cdc/sim/sim_build'
+g++  -I.  -MMD -I/usr/local/share/verilator/include -I/usr/local/share/verilator/include/vltstd -DVERILATOR=1 -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TIMING=0 -DVM_TRACE=1 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=1 -DVM_TRACE_SAIF=0 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-int-in-bool-context -Wno-shadow -Wno-sign-compare -Wno-subobject-linkage -Wno-tautological-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable      -Os  -c -o verilator.o /usr/local/lib/python3.10/dist-packages/cocotb/share/lib/verilator/verilator.cpp
+g++ -Os  -I.  -MMD -I/usr/local/share/verilator/include -I/usr/local/share/verilator/include/vltstd -DVERILATOR=1 -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TIMING=0 -DVM_TRACE=1 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=1 -DVM_TRACE_SAIF=0 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-int-in-bool-context -Wno-shadow -Wno-sign-compare -Wno-subobject-linkage -Wno-tautological-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable      -c -o verilated.o /usr/local/share/verilator/include/verilated.cpp
+g++ -Os  -I.  -MMD -I/usr/local/share/verilator/include -I/usr/local/share/verilator/include/vltstd -DVERILATOR=1 -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TIMING=0 -DVM_TRACE=1 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=1 -DVM_TRACE_SAIF=0 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-int-in-bool-context -Wno-shadow -Wno-sign-compare -Wno-subobject-linkage -Wno-tautological-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable      -c -o verilated_dpi.o /usr/local/share/verilator/include/verilated_dpi.cpp
+g++ -Os  -I.  -MMD -I/usr/local/share/verilator/include -I/usr/local/share/verilator/include/vltstd -DVERILATOR=1 -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TIMING=0 -DVM_TRACE=1 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=1 -DVM_TRACE_SAIF=0 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-int-in-bool-context -Wno-shadow -Wno-sign-compare -Wno-subobject-linkage -Wno-tautological-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable      -c -o verilated_vpi.o /usr/local/share/verilator/include/verilated_vpi.cpp
+g++ -Os  -I.  -MMD -I/usr/local/share/verilator/include -I/usr/local/share/verilator/include/vltstd -DVERILATOR=1 -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TIMING=0 -DVM_TRACE=1 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=1 -DVM_TRACE_SAIF=0 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-int-in-bool-context -Wno-shadow -Wno-sign-compare -Wno-subobject-linkage -Wno-tautological-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable      -c -o verilated_vcd_c.o /usr/local/share/verilator/include/verilated_vcd_c.cpp
+g++ -Os  -I.  -MMD -I/usr/local/share/verilator/include -I/usr/local/share/verilator/include/vltstd -DVERILATOR=1 -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TIMING=0 -DVM_TRACE=1 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=1 -DVM_TRACE_SAIF=0 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-int-in-bool-context -Wno-shadow -Wno-sign-compare -Wno-subobject-linkage -Wno-tautological-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable      -c -o verilated_threads.o /usr/local/share/verilator/include/verilated_threads.cpp
+python3 /usr/local/share/verilator/bin/verilator_includer -DVL_INCLUDE_OPT=include Vtop.cpp Vtop___024root__0.cpp Vtop__Dpi.cpp Vtop__Trace__0.cpp Vtop__ConstPool__0__Slow.cpp Vtop___024root__Slow.cpp Vtop___024root__0__Slow.cpp Vtop_pkg_defines__Slow.cpp Vtop__Syms__Slow.cpp Vtop__Trace__0__Slow.cpp Vtop__TraceDecls__0__Slow.cpp > Vtop__ALL.cpp
+g++ -Os  -I.  -MMD -I/usr/local/share/verilator/include -I/usr/local/share/verilator/include/vltstd -DVERILATOR=1 -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TIMING=0 -DVM_TRACE=1 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=1 -DVM_TRACE_SAIF=0 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-int-in-bool-context -Wno-shadow -Wno-sign-compare -Wno-subobject-linkage -Wno-tautological-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable      -c -o Vtop__ALL.o Vtop__ALL.cpp
+g++    verilator.o verilated.o verilated_dpi.o verilated_vpi.o verilated_vcd_c.o verilated_threads.o Vtop__ALL.a   -Wl,-rpath,/usr/local/lib/python3.10/dist-packages/cocotb/libs -L/usr/local/lib/python3.10/dist-packages/cocotb/libs -lcocotbvpi_verilator  -pthread -lpthread -latomic   -o Vtop
+rm Vtop__ALL.verilator_deplist.tmp
+make[2]: Leaving directory '/mnt/c/Users/adity/Documents/GitHub/async-fifo-cdc/sim/sim_build'
+rm -f results.xml
+MODULE=test_eth_frame_parser TESTCASE= TOPLEVEL=eth_frame_parser TOPLEVEL_LANG=verilog \
+         sim_build/Vtop  --assert --trace  
+     -.--ns INFO     gpi                                ..mbed/gpi_embed.cpp:79   in set_program_name_in_venv        Did not detect Python virtual environment. Using system-wide Python interpreter
+     -.--ns INFO     gpi                                ../gpi/GpiCommon.cpp:101  in gpi_print_registered_impl       VPI registered
+     0.00ns INFO     cocotb                             Running on Verilator version 5.048 2026-04-26
+     0.00ns INFO     cocotb                             Running tests with cocotb v1.9.2 from /usr/local/lib/python3.10/dist-packages/cocotb
+     0.00ns INFO     cocotb                             Seeding Python random module with 1782513209
+     0.00ns INFO     cocotb.regression                  pytest not found, install it to enable better AssertionError messages
+     0.00ns INFO     cocotb.regression                  Found test test_eth_frame_parser.test_basic_frame
+     0.00ns INFO     cocotb.regression                  Found test test_eth_frame_parser.test_two_byte_payload
+     0.00ns INFO     cocotb.regression                  Found test test_eth_frame_parser.test_unaligned_last_word
+     0.00ns INFO     cocotb.regression                  Found test test_eth_frame_parser.test_output_backpressure
+     0.00ns INFO     cocotb.regression                  Found test test_eth_frame_parser.test_header_backpressure
+     0.00ns INFO     cocotb.regression                  Found test test_eth_frame_parser.test_short_frame_error
+     0.00ns INFO     cocotb.regression                  Found test test_eth_frame_parser.test_random_frames
+     0.00ns INFO     cocotb.regression                  Found test test_eth_frame_parser.test_throughput_no_bubbles
+     0.00ns INFO     cocotb.regression                  running test_basic_frame (1/8)
+   160.00ns INFO     cocotb.regression                  test_basic_frame passed
+   160.00ns INFO     cocotb.regression                  running test_two_byte_payload (2/8)
+                                                          Payload of 2 bytes lands in the header beat (keep[7:6] flush path).
+   310.00ns INFO     cocotb.regression                  test_two_byte_payload passed
+   310.00ns INFO     cocotb.regression                  running test_unaligned_last_word (3/8)
+   470.00ns INFO     cocotb.regression                  test_unaligned_last_word passed
+   470.00ns INFO     cocotb.regression                  running test_output_backpressure (4/8)
+   670.00ns INFO     cocotb.regression                  test_output_backpressure passed
+   670.00ns INFO     cocotb.regression                  running test_header_backpressure (5/8)
+   890.00ns INFO     cocotb.regression                  test_header_backpressure passed
+   890.00ns INFO     cocotb.regression                  running test_short_frame_error (6/8)
+  1020.01ns INFO     cocotb.regression                  test_short_frame_error passed
+  1020.01ns INFO     cocotb.regression                  running test_random_frames (7/8)
+  7620.01ns INFO     cocotb.regression                  test_random_frames passed
+  7620.01ns INFO     cocotb.regression                  running test_throughput_no_bubbles (8/8)
+                                                          Full-rate input -> contiguous payload output (8 bytes/cycle, no bubbles).
+  7990.01ns INFO     cocotb.regression                  test_throughput_no_bubbles passed
+  7990.01ns INFO     cocotb.regression                  **********************************************************************************************************
+                                                        ** TEST                                              STATUS  SIM TIME (ns)  REAL TIME (s)  RATIO (ns/s) **
+                                                        **********************************************************************************************************
+                                                        ** test_eth_frame_parser.test_basic_frame             PASS         160.00           0.00      32343.38  **
+                                                        ** test_eth_frame_parser.test_two_byte_payload        PASS         150.00           0.00      73284.78  **
+                                                        ** test_eth_frame_parser.test_unaligned_last_word     PASS         160.00           0.00      75932.66  **
+                                                        ** test_eth_frame_parser.test_output_backpressure     PASS         200.00           0.00      76650.68  **
+                                                        ** test_eth_frame_parser.test_header_backpressure     PASS         220.00           0.00      70860.93  **
+                                                        ** test_eth_frame_parser.test_short_frame_error       PASS         130.00           0.00      51875.53  **
+                                                        ** test_eth_frame_parser.test_random_frames           PASS        6600.00           0.09      75448.44  **
+                                                        ** test_eth_frame_parser.test_throughput_no_bubbles   PASS         370.00           0.00      79592.61  **
+                                                        **********************************************************************************************************
+                                                        ** TESTS=8 PASS=8 FAIL=0 SKIP=0                                   7990.01           0.16      49277.76  **
+                                                        **********************************************************************************************************
+                                                        
+- :0: Verilog $finish
+make[1]: Leaving directory '/mnt/c/Users/adity/Documents/GitHub/async-fifo-cdc/sim'
