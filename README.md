@@ -39,13 +39,19 @@ resolve to the old or new value).
   MAC/PHY layer has already stripped preamble/SFD and FCS (parsing starts at the
   destination MAC).
 
+**IPv4 parser** — `src/rtl/parser/ipv4_parser.sv`
+- 64-bit AXI-Stream, cut-through. Extracts version/IHL, total length, protocol,
+  and src/dst IP; validates the 20-byte header checksum; emits the realigned L4
+  payload. Restricted to standard 20-byte headers — options (IHL>5), bad version,
+  bad checksum, and truncated frames are flagged and the packet is dropped.
+
 **Testbenches / properties**
-- `tb/test_async_fifo.py`, `tb/test_axis_async_fifo.py`, `tb/ref_model.py` —
-  cocotb tests + Python reference model.
+- `tb/axis.py` — reusable AXI-Stream source/sink BFM.
+- `tb/test_async_fifo.py`, `tb/test_axis_async_fifo.py`, `tb/test_eth_frame_parser.py`,
+  `tb/test_ipv4_parser.py`, `tb/ref_model.py`, `tb/ref_eth.py`, `tb/ref_ipv4.py`
+  — cocotb tests + Python reference models.
 - `src/tb/async_fifo_assertions.sv` — SystemVerilog assertions bound into the
   FIFO (active during simulation).
-- `src/tb/tb_eth_frame_parser.sv` — directed SystemVerilog testbench for the
-  parser.
 - `formal/async_fifo.sby` + `formal/fifo_props.sv` — SymbiYosys formal setup and
   safety properties for the FIFO.
 
@@ -58,6 +64,14 @@ resolve to the old or new value).
 - **FIFO formal (SymbiYosys, k-induction):** proven that the FIFO can never
   overflow, never write when full, and never underflow — for all reachable
   states and all clock-phase relationships. (bmc, cover, and prove all pass.)
+- **Ethernet parser:** 8 cocotb tests pass (lint clean) — directed edge cases
+  (2-byte/unaligned payloads, output + header backpressure), short-frame error,
+  40 constrained-random frames against a Python reference, and an 8 bytes/cycle
+  no-bubble throughput check.
+- **IPv4 parser:** 10 cocotb tests pass (lint clean) — field extraction, header
+  checksum (good + corrupted), options/bad-version/truncated drops, payload
+  realignment across the 4-byte boundary, both-side backpressure, 40 random
+  packets against a Python reference, and a no-bubble throughput check.
 
 Result captures are in `docs/results/` (raw logs/VCD alongside each image).
 
@@ -77,13 +91,31 @@ Fill-to-full then drain-to-empty waveform:
 
 ![Fill/drain waveform](docs/results/waveform_fill_drain.png)
 
+Ethernet frame parser — 8 cocotb tests (directed edge cases + 40 random frames + throughput):
+
+![Eth parser sim](docs/results/eth_sim.png)
+
+Ethernet frame parse — header fields extracted (`hdr_valid`), payload streamed out:
+
+![Eth parse waveform](docs/results/eth_basic_waveform.png)
+
+IPv4 parser — 10 cocotb tests (fields, checksum, drops, realignment, random, throughput):
+
+![IPv4 parser sim](docs/results/ipv4_sim.png)
+
+IPv4 parse — checksum validated, fields extracted, payload streamed out:
+
+![IPv4 parse waveform](docs/results/ipv4_basic_waveform.png)
+
 ## Run
 
 ```bash
 # Simulation (Verilator + cocotb), from sim/
 cd sim
-make MODULE=test_async_fifo      TOPLEVEL=async_fifo
-make MODULE=test_axis_async_fifo TOPLEVEL=axis_async_fifo
+make MODULE=test_async_fifo       TOPLEVEL=async_fifo
+make MODULE=test_axis_async_fifo  TOPLEVEL=axis_async_fifo
+make MODULE=test_eth_frame_parser TOPLEVEL=eth_frame_parser
+make MODULE=test_ipv4_parser      TOPLEVEL=ipv4_parser
 
 # Formal (SymbiYosys), from formal/
 cd formal
